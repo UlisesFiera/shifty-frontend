@@ -1,0 +1,29 @@
+<div class="dashboard">
+	<div class="clock">
+		<p>{{ time }}</p>
+	</div>
+	<div class="emp-code">
+		<form id="clock-in-form" (ngSubmit)="onSubmit()">
+			<textarea
+				id="emp-code" 
+				name="emp-code" 
+				placeholder="code" 
+				rows="1"
+				[(ngModel)]="userInput"
+				(keydown.enter)="onSubmit(); $event.preventDefault()"
+				required
+			></textarea>
+			<div class="clock-in">
+				<button type="submit">clock-in</button>
+			</div>
+		</form>
+	</div>
+	<div class="graph">
+		<div class="graph-item">
+		</div>
+	</div>
+	<div class="on-shift">
+		<div class="on-shift-item">
+		</div>
+	</div>
+</div>

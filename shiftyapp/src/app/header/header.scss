@@ -1,0 +1,15 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.main-header {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 20px;    
+  height: 65px;
+  position: relative;
+  z-index: 9;
+  display: flex;
+  overflow: hidden;
+}
