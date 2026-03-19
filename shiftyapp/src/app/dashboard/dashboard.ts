@@ -15,31 +15,21 @@ import { Employee } from '../employee/employee';
 export class Dashboard implements OnInit{
 
   public selectedEmployee: Employee = {} as Employee;
-  public time: string = "";
+  
   public userInput: string = '';
   public empCodes!: number[];
 
   constructor(private router: Router, private cdr: ChangeDetectorRef, private employeeService: EmployeeService) {}
 
   ngOnInit() {
-    this.getEmployeeCodes();
-    this.updateTime();               // initial time
-
-    setInterval(() => {
-      this.updateTime();
-      this.cdr.markForCheck();       // tell Angular to update template
-    }, 1000);
+    this.getEmployeeCodes();           
   }
-
+  
   public getEmployeeCodes(): void {
     this.employeeService.getEmployeeCodes().subscribe({
       next: (ids) => this.empCodes = ids,
       error: (err) => console.error(err)
     });
-  }
-
-  public updateTime(): void {
-    this.time = new Date().toLocaleTimeString();
   }
 
   public onSubmit(): void {

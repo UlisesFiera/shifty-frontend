@@ -1,11 +1,9 @@
-.dashboard {
+.dashboard 
+{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	.clock {
-		margin-top: 50px;
-	}
 	.emp-code {        
 		margin-top: 20px;
 	}
@@ -28,29 +26,4 @@
 	.clock-in {
 		margin-bottom: 20px;
  	}
-}
-
-.graph {
-	width: 100%;						// take full page width
-  	.graph-item {
-		height: 450px;
-		border: 2px dashed #ccc;
-		background-color: #f9f9f9;
-		margin: 0 20px;					// match header margins
-		width: auto;					// natural width
-		align-self: stretch;    		// stretch horizontally, only for this element
-	}
-}
-
-.on-shift {
-	margin-top: 50px;
-	width: 100%;						// take full page width
-  	.on-shift-item {
-		height: 50px;
-		border: 2px dashed #ccc;
-		background-color: #f9f9f9;
-		margin: 0 20px;					// match header margins
-		width: auto;					// natural width
-		align-self: stretch;    		// stretch horizontally, only for this element
-	}
 }
