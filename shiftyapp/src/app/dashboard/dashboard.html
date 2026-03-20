@@ -1,5 +1,23 @@
 <div class="dashboard">
-	<div class="emp-code">
+
+	<div class="timeline"></div>
+
+	<div class="time">
+		<div class="start">00:00</div>
+		<div class="afternoon">12:00</div>
+		<div class="end">24:00</div>
+	</div>
+
+	<div class="marks">
+		<div class="mark start-dot"></div>
+		<div class="mark afternoon-dot"></div>
+		<div class="mark end-dot"></div>
+  	</div>
+</div>
+
+<!---
+
+<div class="emp-code">
 		<form id="clock-in-form" (ngSubmit)="onSubmit()">
 			<textarea
 				id="emp-code" 
@@ -8,11 +26,13 @@
 				rows="1"
 				[(ngModel)]="userInput"
 				(keydown.enter)="onSubmit(); $event.preventDefault()"
-				required
-			></textarea>
+				required>
+			</textarea>
 			<div class="clock-in">
 				<button type="submit">clock-in</button>
 			</div>
 		</form>
 	</div>
-</div>
+
+
+--->
