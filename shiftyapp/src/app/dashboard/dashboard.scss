@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .dashboard 
 {
 	display: flex;
@@ -51,13 +53,14 @@
 	.time
 	{
 		position: fixed;
-		top: 47%;
+		top: 50%;
 		left: 50%;
-		transform: translateX(-50%);
-		width: 1230px;
+		transform: translate(-50%, -50%);
+		height: 10px;
+		width: 1223px;
 		background-color: transparent;
 		font-family: 'Inter', sans-serif;
-		font-size: 12px;
+		font-size: 8px;
 		color: #ffffffc2;
 		z-index: 1001;
 		text-align: center;
@@ -79,6 +82,7 @@
 		}
 	}
 
+	// 12-hours circles
 	.marks
 	{
 		position: fixed;
@@ -86,33 +90,79 @@
 		left: 50%;
 		width: 1200px;
 		transform: translateX(-50%);
-		z-index: 1002;
+		z-index: 1000;
 	}
-
 	.mark
 	{
 		position: absolute;
-		width: 8px;
-		height: 8px;
-		background-color: #ffff00b2;
+		width: 32px;
+		height: 32px;
+		background-color: #1d1d1dd7;
 		border-radius: 50%;
+		border: 1px solid #ffff00b2;
 	}
-
 	.start-dot
 	{
 		left: 0;
 		transform: translateX(-50%) translateY(-50%);
 	}
-
 	.afternoon-dot
 	{
 		left: 50%;
 		transform: translateX(-50%) translateY(-50%);
 	}
-
 	.end-dot
 	{
 		right: 0;
 		transform: translateX(50%) translateY(-50%);
+	}
+
+	// timeline-hour marks
+	.ticks
+	{
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		width: 1200px;
+		transform: translate(-50%, -50%);
+		z-index: 999;
+	}
+
+	.tick
+	{
+		position: absolute;
+		width: 1px;
+		height: 8px;
+		background-color: #ffff00b2;
+		transform: translateY(-50%);
+	}
+	@for $i from 0 through 24
+	{
+		.tick:nth-child(#{$i + 1})
+		{
+			left: math.div($i, 24) * 100%;
+		}
+	}
+
+	// clock-in and out elements
+
+	.clock-elements
+	{
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		width: 1200px;
+		transform: translateX(-50%);
+		z-index: 1010;
+	}
+	.dot
+	{
+		position: absolute;
+		width: 8px;
+		height: 8px;
+		background-color: #000000;
+		border-radius: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		left: 30%;
 	}
 }

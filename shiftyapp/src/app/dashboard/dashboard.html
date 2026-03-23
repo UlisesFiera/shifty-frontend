@@ -13,26 +13,42 @@
 		<div class="mark afternoon-dot"></div>
 		<div class="mark end-dot"></div>
   	</div>
-</div>
 
-<!---
-
-<div class="emp-code">
-		<form id="clock-in-form" (ngSubmit)="onSubmit()">
-			<textarea
-				id="emp-code" 
-				name="emp-code" 
-				placeholder="code" 
-				rows="1"
-				[(ngModel)]="userInput"
-				(keydown.enter)="onSubmit(); $event.preventDefault()"
-				required>
-			</textarea>
-			<div class="clock-in">
-				<button type="submit">clock-in</button>
-			</div>
-		</form>
+	<div class="ticks">
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
+		<div class="tick"></div>
 	</div>
 
-
---->
+	<div class="clock-elements">
+		<div class="dot"></div>
+	</div>
+	<!--- 
+	// if
+	// - clock in: green
+	// - clock out: red
+	// position = timeline width / 1440 + ((clock-in?out hour * 60) + (clock-in?out min))
+	---->
+</div>

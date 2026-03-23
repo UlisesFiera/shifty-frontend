@@ -6,37 +6,37 @@ import { Employee } from './employee';
 import { environment } from '../../environments/environment';
 
 @Injectable({providedIn: 'root',})
-export class EmployeeService {
-  
+export class EmployeeService 
+{
   private apiServerUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
 
   // GET
   public  getEmployees(): Observable<Employee[]> {
-    return (this.http.get<Employee[]>(`${this.apiServerUrl}/shifty/all`));
+    return (this.http.get<Employee[]>(`${this.apiServerUrl}/all`));
   }
 
   public  getEmployeeCodes(): Observable<number[]> {
-    return (this.http.get<number[]>(`${this.apiServerUrl}/shifty/find/all`));
+    return (this.http.get<number[]>(`${this.apiServerUrl}/find/all`));
   }
 
   public  findEmployee(id: number): Observable<Employee> {
-    return (this.http.get<Employee>(`${this.apiServerUrl}/shifty/find/${id}`));
+    return (this.http.get<Employee>(`${this.apiServerUrl}/find/${id}`));
   }
 
   // POST
   public  addEmployee(employee: Employee): Observable<Employee> {
-    return (this.http.post<Employee>(`${this.apiServerUrl}/shifty/add`, employee));
+    return (this.http.post<Employee>(`${this.apiServerUrl}/add`, employee));
   }
 
   // PUT
   public  updateEmployee(employee: Employee): Observable<Employee> {
-    return (this.http.put<Employee>(`${this.apiServerUrl}/shifty/update`, employee));
+    return (this.http.put<Employee>(`${this.apiServerUrl}/update`, employee));
   }
 
   // DELETE
   public  deleteEmployee(employeeId: number): Observable<void> {
-    return (this.http.delete<void>(`${this.apiServerUrl}/shifty/delete${employeeId}`));
+    return (this.http.delete<void>(`${this.apiServerUrl}/delete${employeeId}`));
   }
 }
