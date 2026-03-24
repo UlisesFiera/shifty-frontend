@@ -2,7 +2,7 @@ import { Employee } from "../employee/employee";
 
 export interface Entries 
 {
-	empId: number;
+	id: number;
 	employee: Employee;
 	clockIn: Date;
 	clockOut: Date

@@ -88,6 +88,7 @@
 	}
 
 	// timeline-hour marks
+
 	.ticks
 	{
 		position: fixed;
@@ -134,5 +135,42 @@
 	{
 		background-color: #ff4a4a;
 		box-shadow: 0 0 3px #ff4a4a8e;
+	}
+
+	.line
+	{
+		position: absolute;
+		width: 1px;
+		transform: translateX(-50%) translateY(0); 
+		z-index: 1100;
+	}
+	.line-in
+	{
+		background-color: #5eff81;
+	}
+	.line-out
+	{
+		background-color: #ff4a4a;
+	}
+
+	.thumb
+	{
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		border-radius: 100%;
+		z-index: 1100;
+		background-color: black;
+		transform: translateX(-50%);
+	}
+	.thumb-in
+	{
+		border: 1px solid;
+		border-color: #5eff81;
+	}
+	.thumb-out
+	{
+		border: 1px solid;
+		border-color: #ff4a4a;
 	}
 }

@@ -2,9 +2,10 @@
 
 // Background stuff
 
-body {
+body 
+{
   background: 
-    radial-gradient(circle, rgba(255, 230, 0, 0.377) 0%, transparent 1px),
+    radial-gradient(circle, rgba(255, 230, 0, 0.185) 0%, transparent 1px),
     radial-gradient(circle, #181818, #0c0c0c);
   background-size: 30px 30px, cover;
   font-family: 'Inter', sans-serif;

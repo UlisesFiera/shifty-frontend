@@ -43,8 +43,44 @@
 		</div>
 
 		<div *ngFor="let entry of entries()">
-			<span class="dot dot-in" [style.left]="getInPosition(entry)"></span>
-			<span *ngIf="getOuts(entry)" class="dot dot-out" [style.left]="getOutPosition(entry)"></span>
+			<span class="dot dot-in" [style.left]="getInPosition(entry)">
+			</span>
+
+			<span 
+				class="line line-in" 
+				[style.left]="getInPosition(entry)" 
+				[style.height]="getEntryLineHeight(entry)" 
+				[style.top.%]="!getEntryLineDir(entry) ? 50 : null" 
+				[style.bottom.%]="getEntryLineDir(entry) ? 50 : null">
+			</span>
+
+			<span
+				class="thumb thumb-in"
+				[style.left]="getInPosition(entry)" 
+				[style.top]="getEntryLineHeight(entry)"
+				[style.top]="!getEntryLineDir(entry) ? getEntryLineHeight(entry) : null"
+				[style.bottom]="getEntryLineDir(entry) ? getEntryLineHeight(entry) : null">
+			</span>
+
+			<span *ngIf="getOuts(entry)" class="dot dot-out" [style.left]="getOutPosition(entry)">
+			</span>
+
+			<span 
+				*ngIf="getOuts(entry)" 
+				class="line line-out" 
+				[style.left]="getOutPosition(entry)" 
+				[style.height]="getEntryLineHeight(entry)" 
+				[style.top.%]="!getEntryLineDir(entry) ? 50 : null" 
+				[style.bottom.%]="getEntryLineDir(entry) ? 50 : null">
+			</span>
+
+			<span
+				*ngIf="getOuts(entry)"
+				class="thumb thumb-out"
+				[style.left]="getOutPosition(entry)" 
+				[style.top]="!getEntryLineDir(entry) ? getEntryLineHeight(entry) : null"
+				[style.bottom]="getEntryLineDir(entry) ? getEntryLineHeight(entry) : null">
+			</span>
 		</div>
 
 	</div>
