@@ -1,54 +1,51 @@
 <div class="dashboard">
 
-	<div class="timeline"></div>
+	<div class="timeline">
 
-	<div class="time">
-		<div class="start">00:00</div>
-		<div class="afternoon">12:00</div>
-		<div class="end">24:00</div>
+		<div class="time">
+			<div class="start">00:00</div>
+			<div class="afternoon">12:00</div>
+			<div class="end">24:00</div>
+		</div>
+
+		<div class="marks">
+			<div class="mark start-dot"></div>
+			<div class="mark afternoon-dot"></div>
+			<div class="mark end-dot"></div>
+		</div>
+
+		<div class="ticks">
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+			<div class="tick"></div>
+		</div>
+
+		<div *ngFor="let entry of entries()">
+			<span class="dot dot-in" [style.left]="getInPosition(entry)"></span>
+			<span *ngIf="getOuts(entry)" class="dot dot-out" [style.left]="getOutPosition(entry)"></span>
+		</div>
+
 	</div>
-
-	<div class="marks">
-		<div class="mark start-dot"></div>
-		<div class="mark afternoon-dot"></div>
-		<div class="mark end-dot"></div>
-  	</div>
-
-	<div class="ticks">
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-		<div class="tick"></div>
-	</div>
-
-	<div class="clock-elements">
-		<div class="dot"></div>
-	</div>
-	<!--- 
-	// if
-	// - clock in: green
-	// - clock out: red
-	// position = timeline width / 1440 + ((clock-in?out hour * 60) + (clock-in?out min))
-	---->
 </div>
