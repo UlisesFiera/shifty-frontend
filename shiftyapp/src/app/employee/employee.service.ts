@@ -13,15 +13,18 @@ export class EmployeeService
   constructor(private http: HttpClient) {}
 
   // GET
-  public  getEmployees(): Observable<Employee[]> {
+  public  getEmployees(): Observable<Employee[]> 
+  {
     return (this.http.get<Employee[]>(`${this.apiServerUrl}/all`));
   }
 
-  public  getEmployeeCodes(): Observable<number[]> {
+  public  getEmployeeCodes(): Observable<number[]> 
+  {
     return (this.http.get<number[]>(`${this.apiServerUrl}/find/all`));
   }
 
-  public  findEmployee(id: number): Observable<Employee> {
+  public  findEmployee(id: number): Observable<Employee> 
+  {
     return (this.http.get<Employee>(`${this.apiServerUrl}/find/${id}`));
   }
 

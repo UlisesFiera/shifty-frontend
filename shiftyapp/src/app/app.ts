@@ -1,9 +1,10 @@
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Header } from './header/header';
-import { Dashboard } from './dashboard/dashboard';
-import { ChangeDetectorRef, Component, NgModule, OnInit, signal } from '@angular/core';
 
-@Component({
+import { Header } from './header/header';
+
+@Component(
+{
   selector: 'app-root',
   standalone: true,
   imports: [RouterModule, Header],
@@ -12,22 +13,25 @@ import { ChangeDetectorRef, Component, NgModule, OnInit, signal } from '@angular
 
 export class App 
 {
-  public time: string = "";
+	public time: string = "";
 
-  constructor(private cdr: ChangeDetectorRef) {}
-  ngOnInit() 
-  {
-    this.updateTime();
-        setInterval(() => 
-        {
-          this.updateTime();
-          this.cdr.markForCheck();       // tell Angular to update template
-        }, 
-        1000);
-  }
+	constructor(private cdr: ChangeDetectorRef) {}
 
-  public updateTime(): void 
-  {
-    this.time = new Date().toLocaleTimeString();
-  }
+	ngOnInit() 
+	{
+		this.updateTime();
+		setInterval(() => 
+		{
+			this.updateTime();
+
+      		// Tells Angular to update template
+			this.cdr.markForCheck();
+		}, 
+		1000);
+	}
+
+	public updateTime(): void 
+	{
+		this.time = new Date().toLocaleTimeString();
+	}
 }
