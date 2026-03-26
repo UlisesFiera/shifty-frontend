@@ -1,20 +1,18 @@
 <div class="clocker-container">
 
+	<div style="height:1vh;"></div>
 	<input type="text" class="clocker-empcode" placeholder="empcode..." #empcodeInput (keyup.enter)="saveEmpcode(empcodeInput.value); empcodeInput.value=''; empcodeInput.blur()">
 
 	<div class="clocker-clockers">
-		<div class="clocker-stack">
-			<div class="clocker-frame">
-				<p class="clocker-text clocker">CLOCKER</p>
-			</div>
-			<form class="clocker-form"></form>
-		</div>
-		<div class="clocker-stack">
-			<div class="clocker-frame">
-				<p class="clocker-text break">BREAK</p>
-			</div>
-			<form class="clocker-form"></form>
-		</div>
-	</div>
 
+		<div class="clocker-stack">
+			<p class="clocker-text clocker">CLOCKER</p>
+			<form class="clocker-form"></form>
+		</div>
+		<div class="clocker-stack">
+			<p class="clocker-text break">BREAK</p>
+			<form class="clocker-form"></form>
+		</div>
+
+	</div>
 </div>

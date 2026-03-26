@@ -8,101 +8,95 @@ $grey: #2c2c2ccc;
 {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
-	gap: 5vw;
-	height: calc(100vh - 200px);
-}
+	gap: 2vw;
+	height: 100vh;
 
-.clocker-clockers
-{	
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	gap: 5vw;
-	height: calc(100vh - 200px);
-}
-
-.clocker-stack 
-{
-	position: relative;
-	width: 20vw;
-	height: 40vh;
-	display: flex;
-	justify-content: center;
-}
-
-.clocker-frame 
-{
-	position: absolute;
-	top: -70px;
-	left: -2.5%;
-	width: 105%;
-	height: 48.5vh;
-	background-color: #1d1d1d41;
-	border-radius: 10%;
-	z-index: 1;
-	border-style: solid;
-	border-color: rgba(85, 85, 85, 0.158);
-	border-width: 1px;
-}
-  
-.clocker-form 
-{
-	position: relative;
-	width: 100%;
-	height: 40vh;
-	background-color: $black;
-	border-radius: 10%;
-	z-index: 2;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-}
-
-.clocker-text
-{
-	position: absolute;
-	text-align: center;
-	transform: translate(-50%, -50%);
-	left: 50%;
-	top: 7.5%;
-	font-size: 30px;
-	font-weight: bolder;
-}
-
-.clocker-empcode 
-{
-	color: rgba(255, 255, 255, 0.774);
-	border-style: solid;
-	border-color: rgba(235, 235, 235, 0.034);
-	border-width: 1px;
-	background-color: $grey;
-	margin: 0;
-	position: absolute;
-	transform: translateX(-50%);
-	left: 50%;
-	top: 15%;
-	background-color: $black;
-	border-radius: 10px;
-	width: 46vw;
-	height: 5vh;
-	text-align: center;
-	&:focus
+	.clocker-empcode 
 	{
-		outline: none;
-		border-style: solid;
-		border-color: rgba(235, 235, 235, 0.034);
-		border-width: 1px;
+		width: 46vw;
+		max-width: 90%;
+		height: 5vh;
+		
+		background-color: $black;
+		border-radius: 10px;
+		color: rgba(255, 255, 255, 0.774);
+		border: 1px solid rgba(235, 235, 235, 0.034);
+
+		text-align: center;
+
+		&:focus
+		{
+			outline: none;
+			border-style: solid;
+			border-color: rgba(235, 235, 235, 0.034);
+			border-width: 1px;
+		}
+		&::placeholder
+		{
+			text-align: center;  
+		}
+		&:focus::placeholder
+		{
+			color: transparent;
+		}
 	}
-	&::placeholder
-	{
-		text-align: center;  
-	}
-	&:focus::placeholder
-	{
-		color: transparent;
-	}
+
+	.clocker-clockers
+	{	
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		gap: 5vw;
+		height: 40vh;
+		
+		.clocker-stack 
+		{
+			position: relative;
+			width: 20vw;
+			height: 40vh;
+			display: flex;
+			justify-content: center;
+			padding-top: 5vh;
+	
+			.clocker-text
+			{
+				position: absolute;
+				text-align: center;
+				transform: translate(-50%, -50%);
+				left: 50%;
+				top: 5%;
+				font-size: 30px;
+				font-weight: bolder;
+			}
+	
+			.clocker-form 
+			{
+				position: absolute;
+				width: 100%;
+				height: 40vh;
+				background-color: $black;
+				border-radius: 10%;
+				z-index: 2;
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
+				&::before 
+				{
+					content: "";
+					position: absolute;
+					top: -15%;
+					left: -2.5%;
+					width: 105%;
+					height: 48.5vh;
+					background-color: #1d1d1d41;
+					border-radius: 10%;
+					z-index: 1;
+					border: 1px solid rgba(85, 85, 85, 0.158);
+				}
+			}
+		}
+	}	
 }
