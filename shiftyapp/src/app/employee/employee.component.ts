@@ -66,16 +66,6 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
-  public onEditEmployee(): void {
-    this.employeeService.updateEmployee(this.selectedEmployee).subscribe({
-      next: () => {
-        this.getEmployees();
-        this.editModal.hide();
-      },
-      error: (err) => console.error(err)
-    });
-  }
-
   public onDeleteEmployee(): void {
     this.employeeService.deleteEmployee(this.selectedEmployee.id).subscribe({
       next: () => {

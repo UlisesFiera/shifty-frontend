@@ -1,0 +1,212 @@
+@use "sass:math";
+$green: #5eff814d;
+$tgreen: #91ff5e88;
+$red: #ff4a4a3d;
+$yellow: #ffff00b2;
+$black: #1d1d1df3;
+$grey: #2c2c2ce8;
+$idle: #777777e8;
+$white: #dddddde1;
+
+.hello 
+{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100vh;
+	width: 100vw;
+
+	.empcode-container
+	{
+		margin-top: 5vh;
+		z-index: 2000;
+
+		.empcode-form {width: 15vw;}
+		.cancel {width: 15vw; box-shadow: 0 0 1px $white;}
+	}
+
+	.clocker-clockers
+	{
+		margin-top: 1vh;
+		width: 15vw;
+		height: 5vh;
+		display: flex;
+		gap: 5px;
+		.clocker-button
+		{
+			width: 100%;
+			height: 100%;
+			border: 0.5px, solid, transparent;
+			&.idle {color: $idle}
+			&:hover {background-color: $grey;}
+			&.in {color: $white; box-shadow: 0 0 1px $green;}
+			&.out {color: $white; box-shadow: 0 0 1px $red;}
+			&.break-in {color: $white; box-shadow: 0 0 1px $yellow;}
+			&.break-out {color: $white; box-shadow: 0 0 1px $yellow;}
+		}
+	}
+
+	.timeline
+	{
+		position: relative;
+		top: 33vh;
+		width: 1200px;
+		height: 1px;
+		background-color: #ffff00b2;
+		z-index: 1000;
+		box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.342);
+
+		.time
+		{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			height: 10px;
+			width: 1223px;
+			background-color: transparent;
+			font-family: 'Inter', sans-serif;
+			font-size: 8px;
+			color: #ffffffc2;
+			z-index: 1001;
+			text-align: center;
+			.start
+			{
+				position: absolute;
+				left: 0;
+			}
+			.afternoon
+			{
+				position: absolute;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+			.end
+			{
+				position: absolute;
+				right: 0;
+			}
+		}
+
+		// 12-hours circles
+		.marks
+		{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 1200px;
+			transform: translateX(-50%);
+			z-index: 1000;
+		}
+		.mark
+		{
+			position: absolute;
+			width: 32px;
+			height: 32px;
+			background-color: #1d1d1dd7;
+			border-radius: 50%;
+			border: 1px solid #ffff00b2;
+		}
+		.start-dot
+		{
+			left: 0;
+			transform: translateX(-50%) translateY(-50%);
+		}
+		.afternoon-dot
+		{
+			left: 50%;
+			transform: translateX(-50%) translateY(-50%);
+		}
+		.end-dot
+		{
+			right: 0;
+			transform: translateX(50%) translateY(-50%);
+		}
+
+		// timeline-hour marks
+
+		.ticks
+		{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 1200px;
+			transform: translate(-50%, -50%);
+			z-index: 999;
+
+			.tick
+			{
+				position: absolute;
+				width: 1px;
+				height: 8px;
+				background-color: $yellow;
+				transform: translateY(-50%);
+			}
+			@for $i from 0 through 24
+			{
+				.tick:nth-child(#{$i + 1})
+				{
+					left: math.div($i, 24) * 100%;
+				}
+			}
+		}
+
+		// clock-in and out elements
+
+		.dot
+		{
+			position: absolute;
+			width: 5px;
+			height: 5px;
+			border-radius: 50%;
+			top: 50%;
+			transform: translateX(-50%) translateY(-50%);
+			z-index: 1100;
+			&.dot-in
+			{
+				background-color: $green;
+				box-shadow: 0 0 3px $green;
+			}
+			&.dot-out
+			{
+				background-color: $red;
+				box-shadow: 0 0 3px $red;
+			}
+		}
+
+		.line
+		{
+			position: absolute;
+			width: 1px;
+			transform: translateX(-50%) translateY(0); 
+			z-index: 1100;
+			&.line-in
+				{background-color: $green;}
+			&.line-out
+				{background-color: $red;}
+		}
+
+		.thumb
+		{
+			position: absolute;
+			width: 20px;
+			height: 20px;
+			border-radius: 100%;
+			z-index: 1100;
+			transform: translateX(-50%);
+			&.thumb-in
+			{
+				border: 1px solid;
+				border-color: $green;
+	
+			}
+			&.thumb-out
+			{
+				border: 1px solid;
+				border-color: $red;
+	
+			}
+		}	
+	}
+}		

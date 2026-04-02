@@ -4,14 +4,29 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule, NgModel } from '@angular/forms';
+import { NavigationEnd, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
-@Component({
-  selector: 'app-header',
-  imports: [MatToolbarModule, MatButtonModule, MatInputModule, MatIconModule, FormsModule ],
-  templateUrl: './header.html',
-  styleUrl: './header.scss',
+@Component(
+{
+	selector: 'app-header',
+	imports: [MatToolbarModule, MatButtonModule, MatInputModule, MatIconModule, FormsModule, CommonModule ],
+	templateUrl: './header.html',
+	styleUrl: './header.scss',
 })
-export class Header {
 
-  protected value = "";
+export class Header 
+{
+	showHeader = true;
+
+	constructor(private router: Router) 
+	{
+		this.router.events.subscribe(event => 
+		{
+			if (event instanceof NavigationEnd) 
+			{
+				this.showHeader = !this.router.url.startsWith('/hello');
+			}
+			});
+	}
 }

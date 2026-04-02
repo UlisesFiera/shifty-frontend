@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
-// Background stuff
+$green: #5eff81;
+$red: #ff4a4a;
+$yellow: #ffff00b2;
+$black: #1d1d1df3;
+$grey: #2c2c2cbb;
+$white: #dadadacc;
+$idle: #777777e8;
 
+// Background stuff
 body
 {
 	box-sizing: border-box;
@@ -24,19 +31,18 @@ body
 	transform: translate(-50%, -50%) scaleX(1) scaleY(1);
 
 	font-family: 'Inter', monospace;
-	//font-style: italic;
 	font-variant-numeric: tabular-nums;
 	font-weight: 900;
 	text-transform: uppercase;
 	text-align: center;
 	white-space: nowrap;
 
-	color: rgba(255, 255, 255, 0.014);
+	color: #ffffff11;
 	pointer-events: none;
 	user-select: none;
 	z-index: -1;
 
-	font-size: 30vh;
+	font-size: 15vw;
 	line-height: 1;
 }
 
@@ -44,33 +50,76 @@ body
 
 button 
 {
-  background: transparent;     
-  border: none;                
-  color: rgba(255, 255, 255, 0.774);              
-  cursor: pointer;
+	background: transparent;     
+	border: none;                
+	color: rgba(255, 255, 255, 0.774);              
+	cursor: pointer;
 }
 
-form
-{
-  background: transparent;     
-  border: none;                
-  color: rgba(255, 255, 255, 0.774);              
-  cursor: pointer;
+.form
+{	
+	width: 10vw;
+	height: 5vh;
+
+	background-color: $black;
+	color: $yellow;
+	transition: background-color 0.5s ease, color 0.5s ease;
+
+	border-radius: 10px;
+	border: none;
+	&::placeholder
+		{color: $idle;}
+	&:focus
+	{
+		background-color: $grey;
+		outline: none;
+	}  
+	&:focus::placeholder 
+		{color: transparent;}
+	&:hover
+	{
+		background-color: $grey;
+	}
+
+	text-align: center;        
 }
 
 textarea
 {
-  background: transparent;     
-  border: none;                
-  color: rgba(255, 255, 255, 0.774);              
-  cursor: pointer;
+	background: transparent;     
+	border: none;                
+	color: rgba(255, 255, 255, 0.774);              
+	cursor: pointer;
 }
 
-button mat-icon 
+.button
 {
-    display: inline-flex;
-    align-items: center;
+	width: 10vw;
+	height: 5vh;
+
+	background-color: $black;
+	color: $white;
+	transition: background-color 0.5s ease, color 0.5s ease;
+
+	border-radius: 10px;
+
+	text-align: center;
+	display: flex;
     justify-content: center;
-    vertical-align: middle;
-    height: 100%;
+    align-items: center;
+
+	&:focus
+	{
+		border: none;
+		background-color: $grey;
+		outline: none;
+	}  
+	&:focus::placeholder 
+		{color: transparent;}
+	&:hover
+	{
+		background-color: $grey;
+	}
+	
+	cursor: pointer;
 }

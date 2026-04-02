@@ -12,7 +12,7 @@ export class EntriesService
 
 	constructor(private http: HttpClient) {}
 
-	public	getAllEntriesInRange(params: GetAllEntriesInRangeRequest): Observable<Entries[]>
+	public getAllEntriesInRange(params: GetAllEntriesInRangeRequest): Observable<Entries[]>
 	{
 		const httpParams = new HttpParams()
 			.set('startDate', params.startDate.toISOString().split('T')[0])
@@ -22,5 +22,25 @@ export class EntriesService
 			httpParams.set('empId', params.empId.toString());
 		
 		return (this.http.get<Entries[]>(`${this.apiServerUrl}/entries/range`, { params: httpParams }));
+	}
+
+	public clockIn(empId: number): Observable<Entries> 
+	{
+		return (this.http.post<Entries>(`${this.apiServerUrl}/entries/${empId}/clock-in`, null));
+	}
+
+	public clockOut(empId: number): Observable<Entries>
+	{
+		return (this.http.put<Entries>(`${this.apiServerUrl}/entries/${empId}/clock-out`, null))
+	}
+
+	public breakIn(empId: number): Observable<Entries> 
+	{
+		return (this.http.put<Entries>(`${this.apiServerUrl}/entries/${empId}/break-in`, null));
+	}
+
+	public breakOut(empId: number): Observable<Entries>
+	{
+		return (this.http.put<Entries>(`${this.apiServerUrl}/entries/${empId}/break-out`, null))
 	}
 }

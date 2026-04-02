@@ -1,4 +1,5 @@
-export interface Employee {
+export interface Employee 
+{
 	id: number;
 	name: string;
 	email: string;
@@ -8,4 +9,8 @@ export interface Employee {
 	employeeCode: string;
 	lastIn: string;
 	lastOut: string;
+	activeEntryId: number;
+	lastBreakIn: string;
+	lastBreakOut: string;
+	onBreak: boolean;
 }
