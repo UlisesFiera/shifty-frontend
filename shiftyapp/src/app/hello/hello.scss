@@ -166,12 +166,12 @@ $white: #dddddde1;
 			&.dot-in
 			{
 				background-color: $green;
-				box-shadow: 0 0 3px $green;
+				box-shadow: 0 0 10px $green;
 			}
 			&.dot-out
 			{
 				background-color: $red;
-				box-shadow: 0 0 3px $red;
+				box-shadow: 0 0 10px $red;
 			}
 		}
 

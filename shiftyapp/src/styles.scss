@@ -1,32 +1,39 @@
+@use 'app/styles/pantone.scss' as p;
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 $green: #5eff81;
 $red: #ff4a4a;
-$yellow: #ffff00b2;
+$yellow: #ffff4388;
 $black: #1d1d1df3;
 $grey: #2c2c2cbb;
 $white: #dadadacc;
 $idle: #777777e8;
 
-// Background stuff
-body
+html, body 
 {
-	box-sizing: border-box;
-	background: 
-		radial-gradient(circle, rgba(255, 230, 0, 0.185) 0%, transparent 1px),
+	margin: 0;
+	height: 100%;
+	background:
+		radial-gradient(circle, rgba(255, 230, 0, 0.247) 0%, transparent 1px),
 		radial-gradient(circle, #181818, #0c0c0c);
 	background-size: 30px 30px, cover;
+
 	font-family: 'Inter', sans-serif;
 	font-size: 14px;
+}
+
+app-root 
+{
+	display: flex;
+	flex-direction: column;
 	height: 100%;
-	min-height: 100%;
-	margin: 0px;
 }
 
 .clock 
 {
 	position: fixed;
-	top: 90%;
+	top: 94%;
 	left: 50%;
 	transform: translate(-50%, -50%) scaleX(1) scaleY(1);
 
@@ -42,21 +49,13 @@ body
 	user-select: none;
 	z-index: -1;
 
-	font-size: 15vw;
+	font-size: 30px;
 	line-height: 1;
 }
 
 // Custom elements
 
-button 
-{
-	background: transparent;     
-	border: none;                
-	color: rgba(255, 255, 255, 0.774);              
-	cursor: pointer;
-}
-
-.form
+.input
 {	
 	width: 10vw;
 	height: 5vh;
@@ -67,6 +66,7 @@ button
 
 	border-radius: 10px;
 	border: none;
+	outline: none;
 	&::placeholder
 		{color: $idle;}
 	&:focus
@@ -84,16 +84,58 @@ button
 	text-align: center;        
 }
 
-textarea
+.form
+{	
+	width: 10vw;
+	height: 5vh;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;     
+	
+	background-color: $black;
+	color: $yellow;
+	transition: background-color 0.5s ease, color 0.5s ease;
+
+	border-radius: 10px;
+	border: none;
+	outline: none;
+	&::placeholder
+		{color: $idle;}
+	&:focus
+	{
+		background-color: $grey;
+		outline: none;
+	}  
+	&:focus::placeholder 
+		{color: transparent;}
+	&:hover
+	{
+		background-color: $grey;
+	}
+
+	text-align: center;        
+}
+
+.led
 {
-	background: transparent;     
-	border: none;                
-	color: rgba(255, 255, 255, 0.774);              
-	cursor: pointer;
+	width: 10px;
+	height: 10px;
+
+	border-radius: 50%;
+	
+	background-color: p.$white;
 }
 
 .button
 {
+	// reset default settings
+	appearance: none;
+  	-webkit-appearance: none;
+	border: none;
+	outline: none;
+
 	width: 10vw;
 	height: 5vh;
 
@@ -105,20 +147,21 @@ textarea
 
 	text-align: center;
 	display: flex;
-    justify-content: center;
-    align-items: center;
+	justify-content: center;
+	align-items: center;
 
 	&:focus
 	{
 		border: none;
-		background-color: $grey;
+		background-color: p.$grey;
 		outline: none;
+		box-shadow: none;
 	}  
 	&:focus::placeholder 
 		{color: transparent;}
 	&:hover
 	{
-		background-color: $grey;
+		background-color: p.$grey;
 	}
 	
 	cursor: pointer;

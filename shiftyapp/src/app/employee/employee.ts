@@ -7,8 +7,8 @@ export interface Employee
 	phone: string;
 	imageUrl: string;
 	employeeCode: string;
-	lastIn: string;
-	lastOut: string;
+	lastClockIn: string;
+	lastClockOut: string;
 	activeEntryId: number;
 	lastBreakIn: string;
 	lastBreakOut: string;

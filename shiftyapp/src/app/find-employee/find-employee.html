@@ -1,0 +1,15 @@
+<div class="find-employee-page">
+	<input type=text class="input search">
+	<div class="emp-list-container">
+		<div *ngFor="let emp of employees()" class="emp-container" (click)="goToEmployeePage(emp)" >
+			<button class="thumb"
+				[style.background-image]="'url(' + emp.imageUrl + ')'" 
+				[style.background-size]="'cover'" 
+				[style.background-position]="'center'" 
+				[style.background-repeat]="'no-repeat'"
+			></button>
+			<button class="button emp-login"> {{ emp.employeeCode }} </button>
+			<button class="button emp-name"> {{ emp.name }} </button>
+		</div>
+	</div>
+</div>

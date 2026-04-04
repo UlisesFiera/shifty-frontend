@@ -5,6 +5,13 @@ import { Observable } from 'rxjs';
 import { Employee } from './employee';
 import { environment } from '../../environments/environment';
 
+export interface EmployeeUpdate 
+{
+	name?: string;
+	email?: string;
+	jobTitle?: string;
+  }
+
 @Injectable({providedIn: 'root',})
 export class EmployeeService 
 {
@@ -24,12 +31,20 @@ export class EmployeeService
 	}
 
 	// POST
-	public  addEmployee(employee: Employee): Observable<Employee> {
+	public  addEmployee(employee: Employee): Observable<Employee> 
+	{
 		return (this.http.post<Employee>(`${this.apiServerUrl}/employees`, employee));
 	}
 
+	// PUT
+	public	updateEmployee(id: number, data: EmployeeUpdate): Observable<Employee>
+	{
+		return (this.http.patch<Employee>(`${this.apiServerUrl}/employees/${id}`, data));
+	}
+
 	// DELETE
-	public  deleteEmployee(employeeId: number): Observable<void> {
+	public  deleteEmployee(employeeId: number): Observable<void> 
+	{
 		return (this.http.delete<void>(`${this.apiServerUrl}/employees/${employeeId}`));
 	}
 }

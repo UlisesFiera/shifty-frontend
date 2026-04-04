@@ -1,0 +1,82 @@
+@use '../styles/pantone.scss' as p;
+
+:host 
+{
+	display: block;
+	flex-grow: 1;	
+}
+
+.find-employee-page
+{
+	height: 100%;
+	width: 100%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	gap: 40px;
+
+	.emp-list-container
+	{
+		//border: 1px, solid, red;
+
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		gap: 50px;
+
+		width: 80vw;
+
+		.emp-container
+		{
+			//border: 1px, solid, red;
+
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+
+			.thumb
+			{
+				height: 80px;
+				width: 80px;
+				border-radius: 50%;
+	
+				border: 0.5px, solid, p.$idle;
+				background-color: transparent;
+
+				transition: box-shadow 0.5s ease, transform 0.5s ease;
+
+				margin-bottom: 15px;
+
+				&:hover
+				{
+					transform: scale(1.15);
+					box-shadow: 0 0 20px #fffc4318;
+				}
+			}
+			.emp-login, .emp-name
+			{
+				width: auto;
+				height: auto;
+
+				color: p.$idle;
+				background-color: transparent;
+
+				transition: color 0.5s ease;
+				&:hover
+				{
+					text-decoration: underline;
+					color: p.$yellow;
+				}
+			}
+			.emp-name
+			{
+				margin-top: -5px;
+			}
+		}
+	}
+}

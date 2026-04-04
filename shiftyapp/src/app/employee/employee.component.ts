@@ -1,78 +1,77 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Modal } from 'bootstrap';
+import { CommonModule } from "@angular/common";
+import { Component, NgModule, signal } from "@angular/core";
+import { EmployeeService, EmployeeUpdate } from "./employee.service";
+import { Employee } from "./employee";
+import { ActivatedRoute } from "@angular/router";
+import { FormsModule } from "@angular/forms";
 
-import { Employee } from './employee';
-import { EmployeeService } from './employee.service';
-import { FormsModule, NgForm } from '@angular/forms';
-
-@Component({
-  selector: 'app-employees',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './employee.html',
-  styleUrls: ['./employee.css']
+@Component(
+{
+	selector: 'app-employee',
+	imports: [CommonModule, FormsModule],
+	templateUrl: './employee.html',
+	styleUrl: './employee.scss',
 })
 
-export class EmployeeComponent implements OnInit {
+export class EmployeeComponent
+{
+	protected	employee = signal<Employee | null>(null);
+	private		employeeId!: string;
+	protected	lastShift!: string;
+	protected	isEditing = signal(false);
 
-  public employees = signal<Employee[]>([]);
-  public selectedEmployee: Employee = {} as Employee;
+	// Employee editing fields
+	protected	editName: string = '';
+	protected	editEmail: string = '';
+	protected	editJobTitle: string = '';
 
-  private addModal!: Modal;
-  private editModal!: Modal;
-  private deleteModal!: Modal;
+	constructor(private route: ActivatedRoute, private empService: EmployeeService) {}
+  
+	ngOnInit() 
+	{
+		this.employeeId = String(this.route.snapshot.paramMap.get('id'));
+		this.empService.findEmployee(this.employeeId).subscribe(employee =>
+		{
+			this.employee.set(employee);
+			this.parseDate(employee.lastClockIn);
+			this.editName = employee.name;
+			this.editEmail = employee.email;
+			this.editJobTitle = employee.jobTitle;
+		});
+	}
 
-  constructor(private employeeService: EmployeeService) {}
+	// modals
+	
+	openEditPanel() { this.isEditing.set(true); } 
+	
+	closeEditPanel() { this.isEditing.set(false); }
 
-  ngOnInit() {
-    this.getEmployees();
-    this.addModal = new Modal(document.getElementById('addEmployeeModal')!);
-    this.editModal = new Modal(document.getElementById('editEmployeeModal')!);
-    this.deleteModal = new Modal(document.getElementById('deleteEmployeeModal')!);
+	// methods
+
+	saveChanges(employee: Employee)
+	{
+		let employeeUpdate: EmployeeUpdate = {};
+
+		employeeUpdate.name = this.editName;
+		employeeUpdate.email = this.editEmail;
+		employeeUpdate.jobTitle = this.editJobTitle;
+
+		this.empService.updateEmployee(employee.id, employeeUpdate).subscribe( data => { console.log("Update successful"); window.location.reload();});
+	}
+
+	// utils
+
+	parseDate(date: string)
+	{
+		const jsDate = new Date(date);
+
+		const year = jsDate.getFullYear();
+		const month = String(jsDate.getMonth() + 1).padStart(2, '0');
+		const day = String(jsDate.getDay()).padStart(2, '0');
+		const hours = String(jsDate.getHours()).padStart(2, '0');
+		const minutes = String(jsDate.getMinutes()).padStart(2, '0');
+
+		this.lastShift = `${year}-${month}-${day} ${hours}:${minutes}`;
+	}
+
   }
-
-  public getEmployees(): void {
-    this.employeeService.getEmployees().subscribe({
-      next: (response: Employee[]) => {
-        this.employees.set(response);
-      },
-      error: (err) => console.error(err)
-    });
-  }
-
-  public onOpenModal(employee: Employee | null, mode: string) {
-    if (mode === 'add') {
-      this.addModal.show();
-    }
-    if (mode === 'edit' && employee) {
-      this.selectedEmployee = { ...employee };
-      this.editModal.show();
-    }
-    if (mode === 'delete' && employee) {
-      this.selectedEmployee = employee;
-      this.deleteModal.show();
-    }
-  }
-
-  public onAddEmployee(addForm: NgForm): void {
-    this.employeeService.addEmployee(addForm.value).subscribe({
-      next: () => {
-        this.getEmployees();
-        this.addModal.hide();
-        addForm.reset();
-      },
-      error: (err) => console.error(err)
-    });
-  }
-
-  public onDeleteEmployee(): void {
-    this.employeeService.deleteEmployee(this.selectedEmployee.id).subscribe({
-      next: () => {
-        this.getEmployees();
-        this.deleteModal.hide();
-      },
-      error: (err) => console.error('Error deleting employee', err)
-    });
-  }
-}
