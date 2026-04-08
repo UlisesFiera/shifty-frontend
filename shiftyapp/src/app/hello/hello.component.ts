@@ -8,12 +8,13 @@ import { Entries, GetAllEntriesInRangeRequest } from '../entries/entries';
 import { Employee } from '../employee/employee';
 import { EmployeeService } from '../employee/employee.service';
 import * as Graphics from './utils/timeline.utils';
+import { MatIcon } from '@angular/material/icon';
 
 @Component(
 {
 	selector: 'app-hello',
 	standalone: true,
-	imports: [CommonModule, FormsModule],
+	imports: [CommonModule, FormsModule, MatIcon],
 	templateUrl: './hello.html',
 	styleUrl: './hello.scss',
 })
@@ -142,5 +143,10 @@ export class Hello implements OnInit
 	cancelClick()
 	{
 		this.selectedEmp = null;
+	}
+
+	login()
+	{
+		this.router.navigate(['/login']);
 	}
 }

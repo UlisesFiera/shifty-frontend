@@ -1,16 +1,20 @@
-<div class="hello">
-	<div class="clock" #clock></div>
-	<div class="empcode-container">
+<div class="hello-page">
+
+	<div class="empcode-form-container">
+		<mat-icon class="mat-icon-large" (click)="login()">person</mat-icon>
 		<input *ngIf="selectedEmp === null" type="text" class="form empcode-form" placeholder="login" #empCodeInput (keyup.enter)="saveEmpcode(empCodeInput.value); empCodeInput.value=''; empCodeInput.blur()">
 		<button *ngIf="selectedEmp !== null " class="button clocker-button cancel" (click)="cancelClick()">cancel</button>
 	</div>
-	<div class="clocker-clockers">
+
+	<div class="clocker-container">
 		<button *ngIf="selectedEmp !== null && selectedEmp.activeEntryId === null" class="button clocker-button in" (click)="clockInClick()">clock in</button>
 		<button *ngIf="selectedEmp !== null && selectedEmp.activeEntryId !== null" class="button clocker-button out" (click)="clockOutClick()">clock out</button>
 		<button *ngIf="selectedEmp !== null && selectedEmp.activeEntryId !== null && selectedEmp.onBreak === false" class="button clocker-button break-in" (click)="breakInClick()">break in</button>
 		<button *ngIf="selectedEmp !== null && selectedEmp.activeEntryId !== null && selectedEmp.onBreak === true" class="button clocker-button break-out" (click)="breakOutClick()">break out</button>
 	</div>
-	
+
+	<div class="divider" style="height: 30%;"></div>
+
 	<div class="timeline">
 		
 		<div class="time">
@@ -97,4 +101,5 @@
 			</span>
 		</div>
 	</div>
+	<div class="clock" #clock></div>
 </div>

@@ -10,7 +10,7 @@ export interface EmployeeUpdate
 	name?: string;
 	email?: string;
 	jobTitle?: string;
-  }
+}
 
 @Injectable({providedIn: 'root',})
 export class EmployeeService 

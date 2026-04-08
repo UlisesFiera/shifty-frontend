@@ -1,7 +1,7 @@
 <div class="main-header" *ngIf="showHeader">
 	<!-- Left-aligned logo -->
 	<div class="header-block">
-		<button class="button" onclick="window.location.href='/dashboard'">Shifty</button>
+		<button class="button" onclick="window.location.href='/hello'">Shifty</button>
 	</div>
 
 	<span class="spacer"></span>
@@ -11,15 +11,7 @@
 		<button class="button" onclick="window.location.href='/find-employee'">Employees</button>
 	</div>
 
-	<!-- Log out -->
 	<div class="header-block">
-		<button class="button"onclick="window.location.href='/clocker'">Clocker</button>
-	</div>
-
-	<!-- Options -->
-	<div class="header-block">
-		<button class="button">
-			<mat-icon>more_vert</mat-icon>
-		</button>
+		<button class="button" (click)="logout()">log out</button>
 	</div>
 </div>
