@@ -12,6 +12,19 @@
 	width: 100%;
 
 	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	
+	gap: 10px;
+}
+
+.emp-container
+{
+	height: fit-content;
+	width: fit-content;
+
+	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
@@ -157,7 +170,7 @@
 		margin-left: 30px;
 		margin-bottom: -20px;
 
-		width: 50px;
+		width: fit-content;
 		border: 1px, solid, p.$yellow;
 
 		color: p.$white;
@@ -195,7 +208,7 @@
 			margin-left: 20px;
 			margin-bottom: -15px;
 	
-			width: 65px;
+			width: fit-content;
 			height: 30px;
 
 			background-color: p.$black;
@@ -229,6 +242,19 @@
 
 			color: p.$idle;
 		}
+	}
+}
+
+.delete-emp
+{
+	width: fit-content;
+	padding: 2ch 1ch; 
+	margin-top: 30px;
+	border: 0.5px, solid;
+	border-color: p.$red;
+	&:hover
+	{
+		background-color: p.$red;
 	}
 }
 

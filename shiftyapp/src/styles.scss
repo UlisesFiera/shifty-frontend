@@ -172,7 +172,7 @@ app-root
 	margin-left: 20px;
 	margin-bottom: -10px;
 
-	width: auto;
+	max-width: fit-content;
 	padding: 0.5ch 1ch;   
 	height: 30px;
 
@@ -182,7 +182,7 @@ app-root
 	border: 0.5px, solid, p.$yellow;
 	border-radius: 10px;
 
-	z-index: 100;
+	z-index: 1000;
 
 	text-align: center;
 	display: flex;

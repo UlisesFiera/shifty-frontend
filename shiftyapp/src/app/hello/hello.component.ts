@@ -8,13 +8,12 @@ import { Entries, GetAllEntriesInRangeRequest } from '../entries/entries';
 import { Employee } from '../employee/employee';
 import { EmployeeService } from '../employee/employee.service';
 import * as Graphics from './utils/timeline.utils';
-import { MatIcon } from '@angular/material/icon';
 
 @Component(
 {
 	selector: 'app-hello',
 	standalone: true,
-	imports: [CommonModule, FormsModule, MatIcon],
+	imports: [CommonModule, FormsModule],
 	templateUrl: './hello.html',
 	styleUrl: './hello.scss',
 })

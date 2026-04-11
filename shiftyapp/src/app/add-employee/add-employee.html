@@ -1,0 +1,24 @@
+<div class="add-employee page">
+
+	<div class="emp-container">
+
+		<div class="edit-panel-container">
+			<div class="edit-panel-frame">
+				<div class="edit-panel-content">
+					<span class="label">name</span>
+					<input class="input editor" placeholder="name" [(ngModel)]="postName">
+					<span class="label">e-mail</span>
+					<input class="input editor" placeholder="e-mail" [(ngModel)]="postEmail">
+					<span class="label">role</span>
+					<input class="input editor" placeholder="role" [(ngModel)]="postRole">
+					<div class="separator"></div>
+					<button class="button picture">add profile picture</button>
+					<button class="button picture" (click)="postEmp()">finish</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+</div>

@@ -1,15 +1,28 @@
 <div class="find-employee-page">
-	<input type=text class="input search">
+
+	<div class="find-container">
+		<label class="label">find...</label>
+		<input (input)="onType($event.target.value)" [formControl]="searchControl" type=text class="input search">
+	</div>
+
 	<div class="emp-list-container">
-		<div *ngFor="let emp of employees()" class="emp-container" (click)="goToEmployeePage(emp)" >
-			<button class="thumb"
-				[style.background-image]="'url(' + emp.imageUrl + ')'" 
-				[style.background-size]="'cover'" 
-				[style.background-position]="'center'" 
-				[style.background-repeat]="'no-repeat'"
-			></button>
-			<button class="button emp-login"> {{ emp.employeeCode }} </button>
-			<button class="button emp-name"> {{ emp.name }} </button>
+		<div class="track" [style.transform]="getTransform()">
+			<button class="thumb new" title="new" onclick="window.location.href='/add-employee'">+</button>
+			<div *ngFor="let emp of filteredEmps()" class="emp-container" (click)="goToEmployeePage(emp)" >
+				<button class="thumb"
+					[style.background-image]="'url(' + emp.imageUrl + ')'" 
+					[style.background-size]="'cover'" 
+					[style.background-position]="'center'" 
+					[style.background-repeat]="'no-repeat'"
+				></button>
+				<button class="button emp-login"> {{ emp.employeeCode }} </button>
+				<button class="button emp-name"> {{ emp.name }} </button>
+			</div>
 		</div>
+	</div>
+
+	<div class="button-container">
+		<button class="button move" (click)="indexPrev()"><</button>
+		<button class="button move" (click)="indexNext()">></button>
 	</div>
 </div>

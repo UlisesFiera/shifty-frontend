@@ -16,18 +16,8 @@
 	flex-direction: column;
 	align-items: center;
 
-	.mat-icon-large
-	{
-		margin-left: 225px;
-		margin-bottom: -35px;
-		cursor: pointer;
-	}
-
 	.empcode-form-container
 	{
-		margin-top: 20px;
-		margin-left: 70px;
-
 		z-index: 2000;
 
 		.empcode-form {width: 15vw;}
@@ -36,7 +26,7 @@
 
 	.clocker-container
 	{
-		margin-top: 1vh;
+		margin-top: 10px;
 		width: 15vw;
 		height: 5vh;
 
@@ -229,7 +219,12 @@
 
 	.clock
 	{
-		margin-top: auto;
-		margin-bottom: 25px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	.clock-elements
+	{
+		
 	}
 }		

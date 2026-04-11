@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, NgModule, signal } from "@angular/core";
 import { EmployeeService, EmployeeUpdate } from "./employee.service";
 import { Employee } from "./employee";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 
 @Component(
@@ -25,7 +25,7 @@ export class EmployeeComponent
 	protected	editEmail: string = '';
 	protected	editJobTitle: string = '';
 
-	constructor(private route: ActivatedRoute, private empService: EmployeeService) {}
+	constructor(private route: ActivatedRoute, public empService: EmployeeService, private router: Router) {}
   
 	ngOnInit() 
 	{
@@ -57,6 +57,15 @@ export class EmployeeComponent
 		employeeUpdate.jobTitle = this.editJobTitle;
 
 		this.empService.updateEmployee(employee.id, employeeUpdate).subscribe( data => { console.log("Update successful"); window.location.reload();});
+	}
+
+	deleteEmp(employee: Employee)
+	{
+		this.empService.deleteEmployee(employee.id).subscribe(
+		{
+			next: () => {console.log('Deleted successfully'), this.router.navigate(["/find-employee"]) },
+			error: err => console.error(err)
+		});
 	}
 
 	// utils

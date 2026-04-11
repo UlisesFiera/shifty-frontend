@@ -7,6 +7,7 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoginService } from '../login/login.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component(
 {
@@ -20,19 +21,5 @@ export class Header
 {
 	showHeader = true;
 
-	constructor(private logService: LoginService, private router: Router) 
-	{
-		this.router.events.subscribe(event => 
-		{
-			if (event instanceof NavigationEnd) 
-			{
-				this.showHeader = !this.router.url.startsWith('/hello');
-			}
-		});
-	}
-
-	logout()
-	{
-		this.logService.logout();
-	}
+	constructor(public authService: AuthService, public logService: LoginService, private router: Router) {}
 }

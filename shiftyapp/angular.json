@@ -6,6 +6,11 @@
     "analytics": "9bef09fc-2b44-44e3-afa0-119a839a1117"
   },
   "newProjectRoot": "projects",
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
   "projects": {
     "shiftyapp": {
       "projectType": "application",

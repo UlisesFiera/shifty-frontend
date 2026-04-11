@@ -1,56 +1,60 @@
-<div class="emp-page"  *ngIf="employee() as emp">
+<div class="emp-page" *ngIf="employee() as emp">
+	<div class="emp-container">
 
-	<div class="emp-data-frame">
-		<button class="button edit-emp-button"  (click)="openEditPanel()">edit</button>
-		<div class="emp-data-content">
-			<div class="thumb"
-				[style.background-image]="'url(' + emp.imageUrl + ')'" 
-				[style.background-size]="'cover'" 
-				[style.background-position]="'center'" 
-				[style.background-repeat]="'no-repeat'"
-			></div>
-			<div *ngIf="emp.activeEntryId !== null" class="led green"></div>
-			<div class="data-content">
-				<p class="data">
-					<span class="title">Id: </span>
-					<span class="content">{{ emp.id }}</span>
-				</p>
-				<p class="data">
-					<span class="title">{{ emp.name }}, </span>
-					<span class="content">{{ emp.employeeCode }}</span>
-				</p>
-				<p class="data">
-					<span class="title">E-mail: </span>
-					<span class="content">{{ emp.email }}</span>
-				</p>
-				<p class="data">
-					<span class="title">Role: </span>
-					<span class="content">{{ emp.jobTitle }}</span>
-				</p>
-				<p class="data">
-					<span class="title">Last shift: </span>
-					<span *ngIf="emp.lastClockIn !== null" class="content">{{ lastShift }}</span>
-					<span *ngIf="emp.lastClockIn === null" class="content">never</span>
-				</p>
+		<div class="emp-data-frame">
+			<button class="button edit-emp-button"  (click)="openEditPanel()">edit</button>
+			<div class="emp-data-content">
+				<div class="thumb"
+					[style.background-image]="'url(' + emp.imageUrl + ')'" 
+					[style.background-size]="'cover'" 
+					[style.background-position]="'center'" 
+					[style.background-repeat]="'no-repeat'"
+				></div>
+				<div *ngIf="emp.activeEntryId !== null" class="led green"></div>
+				<div class="data-content">
+					<p class="data">
+						<span class="title">Id: </span>
+						<span class="content">{{ emp.id }}</span>
+					</p>
+					<p class="data">
+						<span class="title">{{ emp.name }}, </span>
+						<span class="content">{{ emp.employeeCode }}</span>
+					</p>
+					<p class="data">
+						<span class="title">E-mail: </span>
+						<span class="content">{{ emp.email }}</span>
+					</p>
+					<p class="data">
+						<span class="title">Role: </span>
+						<span class="content">{{ emp.jobTitle }}</span>
+					</p>
+					<p class="data">
+						<span class="title">Last shift: </span>
+						<span *ngIf="emp.lastClockIn !== null" class="content">{{ lastShift }}</span>
+						<span *ngIf="emp.lastClockIn === null" class="content">never</span>
+					</p>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="edit-panel-container" *ngIf="isEditing()">
-		<div class="edit-panel-frame">
-			<button class="button close" (click)="closeEditPanel()">x</button>
-			<div class="edit-panel-content">
-				<span class="label">name</span>
-				<input class="input editor" placeholder="{{ emp.name }}" [(ngModel)]="editName">
-				<span class="label">email</span>
-				<input class="input editor" placeholder="{{ emp.email }}" [(ngModel)]="editEmail">
-				<span class="label">job title</span>
-				<input class="input editor" placeholder="{{ emp.jobTitle }}" [(ngModel)]="editJobTitle">
-				<div class="separator"></div>
-				<button class="button picture">change profile picture</button>
-				<button class="button picture" (click)="saveChanges(emp)">save changes</button>
+		<div class="edit-panel-container" *ngIf="isEditing()">
+			<div class="edit-panel-frame">
+				<button class="button close" (click)="closeEditPanel()">x</button>
+				<div class="edit-panel-content">
+					<span class="label">name</span>
+					<input class="input editor" placeholder="{{ emp.name }}" [(ngModel)]="editName">
+					<span class="label">email</span>
+					<input class="input editor" placeholder="{{ emp.email }}" [(ngModel)]="editEmail">
+					<span class="label">job title</span>
+					<input class="input editor" placeholder="{{ emp.jobTitle }}" [(ngModel)]="editJobTitle">
+					<div class="separator"></div>
+					<button class="button picture">change profile picture</button>
+					<button class="button picture" (click)="saveChanges(emp)">save changes</button>
+				</div>
 			</div>
 		</div>
+
 	</div>
 
+	<button class="button delete-emp" (click)="deleteEmp(emp)">delete employee</button>
 </div>

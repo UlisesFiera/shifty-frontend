@@ -8,6 +8,7 @@
 
 .find-employee-page
 {
+	margin-top: 50px;
 	height: 100%;
 	width: 100%;
 
@@ -16,48 +17,47 @@
 	align-items: center;
 	justify-content: center;
 
-	gap: 40px;
+	gap: 20px;
+
+	.find-container
+	{
+		display: flex;
+		width: fit-content;
+
+		margin-right: 30px;
+		.label
+		{
+			margin-right: -22px;
+			margin-top: -20px;
+		}
+		.search
+		{
+			margin-right: 22px;
+			width: 20ch;
+		}
+	}
 
 	.emp-list-container
 	{
-		//border: 1px, solid, red;
-
 		display: flex;
 		flex-direction: row;
-		align-items: center;
 		justify-content: center;
-		gap: 50px;
 
-		width: 80vw;
+		width: 50vw;
+		height: 200px;
 
+		overflow: hidden;
+
+		mask-image: radial-gradient(circle, black 80%, transparent 100%);
 		.emp-container
 		{
-			//border: 1px, solid, red;
-
+			margin-top: 40px;
 			display: flex;
+			flex: 0 0 140px;
+
 			flex-direction: column;
 			align-items: center;
-			justify-content: center;
 
-			.thumb
-			{
-				height: 80px;
-				width: 80px;
-				border-radius: 50%;
-	
-				border: 0.5px, solid, p.$idle;
-				background-color: transparent;
-
-				transition: box-shadow 0.5s ease, transform 0.5s ease;
-
-				margin-bottom: 15px;
-
-				&:hover
-				{
-					transform: scale(1.15);
-					box-shadow: 0 0 20px #fffc4318;
-				}
-			}
 			.emp-login, .emp-name
 			{
 				width: auto;
@@ -79,4 +79,66 @@
 			}
 		}
 	}
+
+	.thumb
+	{
+		height: 80px;
+		width: 80px;
+		border-radius: 50%;
+
+		border: 0.5px, solid, p.$idle;
+		background-color: transparent;
+
+		transition: box-shadow 0.5s ease, transform 0.5s ease;
+
+		margin-bottom: 15px;
+
+		color: p.$white;
+
+		&:hover
+		{
+			transform: scale(1.15);
+			box-shadow: 0 0 20px #fffc4318;
+		}
+	}
+	
+	.new
+	{
+		margin-top: 10px;
+		height: 140px;
+		width: 140px;
+
+		transform: scale(0.4);
+		&:hover
+		{
+			transform: scale(0.6);
+			box-shadow: 0 0 10px #7bff0023;
+		}
+	}
 }
+
+.track 
+{
+	display: flex;
+	
+	gap: 20px;
+	transition: transform 0.3s ease;
+	transform: translateX(0);
+}
+
+.button-container
+{
+	display: flex;
+	flex-direction: row;
+
+	width: auto;
+
+	gap: 20px;
+
+	.move
+	{
+		width: auto;
+	}
+}
+
+//border: 1px, solid, red;

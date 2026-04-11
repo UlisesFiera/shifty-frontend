@@ -45,6 +45,8 @@ export class EmployeeService
 	// DELETE
 	public  deleteEmployee(employeeId: number): Observable<void> 
 	{
+		console.log("Deleting employee id: " + employeeId);
+		
 		return (this.http.delete<void>(`${this.apiServerUrl}/employees/${employeeId}`));
 	}
 }

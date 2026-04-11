@@ -12,11 +12,16 @@ export class AuthService
 
 	getToken(): string | null 
 	{
-		return localStorage.getItem(this.tokenKey);
+		return (localStorage.getItem(this.tokenKey));
 	}
 
 	clearToken() 
 	{
 		localStorage.removeItem(this.tokenKey);
+	}
+
+	isLoggedIn(): boolean
+	{
+		return (!!this.getToken());
 	}
 }
