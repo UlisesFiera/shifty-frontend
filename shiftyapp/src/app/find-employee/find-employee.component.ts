@@ -79,14 +79,18 @@ export class FindEmployeeComponent
 		this.index.set((this.index() - 1));
 	}
 
+	// 160 is the width of the elements + the gap; we substract 1 step so we end up just 1 position right to the "add emp" button
 	getTransform() 
 	{
+		if (this.filteredEmps().length == 0)
+			return ;
 		let move: number = 0;
 		let step: number = 160;
 		let position: number = (Math.floor(((this.filteredEmps().length) * 160) / 2)) - step;
 
 		move = -step * this.index();
 		position += move;
+
 		return (`translateX(${position}px)`);
 	}
 }

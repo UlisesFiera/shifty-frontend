@@ -1,4 +1,5 @@
 <div class="emp-page" *ngIf="employee() as emp">
+
 	<div class="emp-container">
 
 		<div class="emp-data-frame">
@@ -55,6 +56,8 @@
 		</div>
 
 	</div>
-
-	<button class="button delete-emp" (click)="deleteEmp(emp)">delete employee</button>
+	<div class="wrap-bot-buttons">
+		<button class="button back" onclick="window.location.href='/find-employee'"><mat-icon>arrow_back</mat-icon></button>
+		<button class="button delete-emp" (click)="deleteEmp(emp)">delete employee</button>
+	</div>
 </div>

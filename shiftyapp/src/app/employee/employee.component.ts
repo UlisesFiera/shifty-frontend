@@ -4,11 +4,12 @@ import { EmployeeService, EmployeeUpdate } from "./employee.service";
 import { Employee } from "./employee";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component(
 {
 	selector: 'app-employee',
-	imports: [CommonModule, FormsModule],
+	imports: [CommonModule, FormsModule, MatIconModule],
 	templateUrl: './employee.html',
 	styleUrl: './employee.scss',
 })

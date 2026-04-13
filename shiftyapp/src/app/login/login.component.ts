@@ -32,7 +32,7 @@ export class LoginComponent
 		{
 			this.loginService.login(this.loginForm).subscribe(
 			{
-				next: (response) => { console.log('Login response:', response); this.authService.setToken(response.token), this.router.navigate(['/find-employee']);}, 
+				next: (response) => { console.log('Login response:', response); this.authService.setToken(response.token), this.router.navigate(['/hello']);}, 
 				error: (error) => {console.error('Login error:', error);}
 			});
 		}

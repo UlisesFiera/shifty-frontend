@@ -248,8 +248,9 @@
 .delete-emp
 {
 	width: fit-content;
-	padding: 2ch 1ch; 
-	margin-top: 30px;
+
+	margin-right: auto;
+	
 	border: 0.5px, solid;
 	border-color: p.$red;
 	&:hover
@@ -261,4 +262,13 @@
 .separator
 {
 	margin-top: 10px;
+}
+
+.wrap-bot-buttons
+{
+	display: flex;
+
+	height: auto;
+	width: 370px;
+	gap: 10px;
 }
