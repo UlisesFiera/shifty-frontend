@@ -8,6 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoginService } from '../login/login.service';
 import { AuthService } from '../auth/auth.service';
+import { UiStateService } from './uiState.service';
 
 @Component(
 {
@@ -19,7 +20,17 @@ import { AuthService } from '../auth/auth.service';
 
 export class Header 
 {
-	showHeader = true;
+	constructor( public authService: AuthService, public logService: LoginService, private router: Router, public ui: UiStateService ) {}
 
-	constructor(public authService: AuthService, public logService: LoginService, private router: Router) {}
+	get isHelloPage(): boolean 
+	{
+		return (this.router.url.includes('/hello'));
+	}
+
+	logOut()
+	{
+		this.ui.showHeader = true; 
+		this.logService.logout(); 
+		window.location.reload()
+	}
 }

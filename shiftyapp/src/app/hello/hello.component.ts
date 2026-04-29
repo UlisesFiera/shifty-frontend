@@ -1,12 +1,14 @@
-import { ChangeDetectorRef, Component, computed, ElementRef, NgZone, OnInit, signal, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, computed, NgZone, OnInit, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 
 import { EntriesService } from '../entries/entries.service';
 import { Entries, GetAllEntriesInRangeRequest } from '../entries/entries';
 import { Employee } from '../employee/employee';
 import { EmployeeService } from '../employee/employee.service';
+import { LoginService } from '../login/login.service';
+import { UiStateService } from '../header/uiState.service';
 
 @Component(
 {
@@ -38,7 +40,9 @@ export class Hello implements OnInit
 	public	selectedEmp: Employee | null = null;
 	public	fallbackImage = 'avatar.svg';
 	
-	constructor(private router: Router, private entriesService: EntriesService, public employeeService: EmployeeService, private ngZone: NgZone, private cdr: ChangeDetectorRef) {}
+	constructor( private router: Router, private entriesService: EntriesService, 
+				public employeeService: EmployeeService, private ngZone: NgZone, private cdr: ChangeDetectorRef,
+				public logService: LoginService, public ui: UiStateService) {}
 
 	ngOnInit() 
 	{
@@ -52,9 +56,7 @@ export class Hello implements OnInit
 					this.emps().forEach(emp => 
 					{
 						if (emp.activeEntryId) 
-						{
 							this.setTrailSize(emp);
-						}
 					});
 				});
 			}, 60000);

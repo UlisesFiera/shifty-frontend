@@ -1,16 +1,22 @@
-<div class="main-header" >
+<div class="main-header">
 
-	<div class="header-block">
+	<div class="header-block" *ngIf="ui.showHeader">
 		<button class="button" onclick="window.location.href='/hello'">Shifty</button>
 	</div>
 
-	<div class="header-block">
+	<div class="header-block" *ngIf="ui.showHeader">
 		<button class="button" onclick="window.location.href='/find-employee'">Employees</button>
 	</div>
 
 	<div class="header-block">
 		<button class="button" *ngIf="!authService.isLoggedIn()" onclick="window.location.href='/login'">Login</button>
-		<button class="button" *ngIf="authService.isLoggedIn()" (click)="logService.logout()">Logout</button>
+		<button class="button" *ngIf="authService.isLoggedIn()" (click)="logOut();">Logout</button>
+	</div>
+
+	<div class="header-block" *ngIf="isHelloPage">
+		<button class="button" (click)="ui.showHeader = false;">
+			<span class="material-icons" style="font-size: 16px;">lock</span>
+		</button>
 	</div>
 	
 </div>

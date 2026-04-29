@@ -15,7 +15,7 @@ import { AuthService } from '../auth/auth.service';
 
 export class LoginComponent
 {
-	protected loginForm:	FormGroup;
+	protected loginForm: FormGroup;
 
 	constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder, private http: HttpClient, private loginService: LoginService) 
 	{
@@ -37,5 +37,4 @@ export class LoginComponent
 			});
 		}
 	}
-
 }
