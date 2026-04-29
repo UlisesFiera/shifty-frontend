@@ -10,6 +10,7 @@ export interface EmployeeUpdate
 	name?: string;
 	email?: string;
 	jobTitle?: string;
+	imageUrl?: string;
 }
 
 @Injectable({providedIn: 'root',})
@@ -25,9 +26,33 @@ export class EmployeeService
 		return (this.http.get<Employee[]>(`${this.apiServerUrl}/employees`));
 	}
 
-	public  findEmployee(employeeId: string): Observable<Employee> 
+	public	getElapsedTime(empId: number): Observable<any>
 	{
-		return (this.http.get<Employee>(`${this.apiServerUrl}/employees/${employeeId}`));
+		return (this.http.get<any>(`${this.apiServerUrl}/employees/${empId}/elapsed`));
+	}
+
+	public  findEmployee(employeeCode: string): Observable<Employee> 
+	{
+		return (this.http.get<Employee>(`${this.apiServerUrl}/employees/${employeeCode}`));
+	}
+
+	public	getImageUrl(emp: Employee): string 
+	{
+		if (emp.imageUrl?.startsWith('/files/'))
+			return ("http://192.168.1.136:8080" + emp.imageUrl);
+	
+		if (!emp.imageUrl) 
+			return '';
+
+		if (emp.imageUrl.startsWith('/files/'))
+			return ("http://192.168.1.136:8080" + emp.imageUrl);
+
+		// Handle absolute file paths from backend
+		if (emp.imageUrl.includes('/uploads/')) {
+			const filename = emp.imageUrl.split('/uploads/').pop();
+			return ("http://192.168.1.136:8080" + '/files/' + filename);
+		}
+		return emp.imageUrl;
 	}
 
 	// POST
@@ -36,10 +61,15 @@ export class EmployeeService
 		return (this.http.post<Employee>(`${this.apiServerUrl}/employees`, employee));
 	}
 
-	// PUT
-	public	updateEmployee(id: number, data: EmployeeUpdate): Observable<Employee>
+	public  uploadFile(formData: FormData): Observable<string> 
 	{
-		return (this.http.patch<Employee>(`${this.apiServerUrl}/employees/${id}`, data));
+		return (this.http.post(`${this.apiServerUrl}/upload`, formData, { responseType: 'text' }));
+	}
+
+	// PUT
+	public	updateEmployee(empId: number, data: EmployeeUpdate): Observable<Employee>
+	{
+		return (this.http.patch<Employee>(`${this.apiServerUrl}/employees/${empId}`, data));
 	}
 
 	// DELETE

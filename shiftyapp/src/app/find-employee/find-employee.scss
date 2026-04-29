@@ -86,7 +86,7 @@
 		width: 80px;
 		border-radius: 50%;
 
-		border: 0.5px, solid, p.$idle;
+		border: 0.5px, solid, p.$grey;
 		background-color: transparent;
 
 		transition: box-shadow 0.5s ease, transform 0.5s ease;
@@ -98,7 +98,6 @@
 		&:hover
 		{
 			transform: scale(1.15);
-			box-shadow: 0 0 20px #fffc4318;
 		}
 	}
 	
@@ -108,11 +107,13 @@
 		height: 140px;
 		width: 140px;
 
+		color: p.$grey;
+		font-size: 60px;
+
 		transform: scale(0.4);
 		&:hover
 		{
 			transform: scale(0.6);
-			box-shadow: 0 0 10px #7bff0023;
 		}
 	}
 }

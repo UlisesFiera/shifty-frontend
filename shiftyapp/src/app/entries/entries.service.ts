@@ -14,11 +14,11 @@ export class EntriesService
 
 	public getAllEntriesInRange(params: GetAllEntriesInRangeRequest): Observable<Entries[]>
 	{
-		const httpParams = new HttpParams()
+		let httpParams = new HttpParams()
 			.set('startDate', params.startDate.toISOString().split('T')[0])
 			.set('endDate', params.endDate.toISOString().split('T')[0]);
 
-		if (params.empId)
+		if (params.empId !== undefined)
 			httpParams.set('empId', params.empId.toString());
 		
 		return (this.http.get<Entries[]>(`${this.apiServerUrl}/entries/range`, { params: httpParams }));

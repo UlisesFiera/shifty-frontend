@@ -3,9 +3,9 @@ import { Employee } from "../employee/employee";
 export interface Entries 
 {
 	id: number;
-	employee: Employee;
+	employeeId: number;
 	clockIn: Date;
-	clockOut: Date
+	clockOut: Date;
 	shiftDuration: number;
 }
 

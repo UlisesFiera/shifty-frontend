@@ -7,7 +7,6 @@ import { EntriesService } from '../entries/entries.service';
 import { Entries, GetAllEntriesInRangeRequest } from '../entries/entries';
 import { Employee } from '../employee/employee';
 import { EmployeeService } from '../employee/employee.service';
-import * as Graphics from './utils/timeline.utils';
 
 @Component(
 {
@@ -20,50 +19,138 @@ import * as Graphics from './utils/timeline.utils';
 
 export class Hello implements OnInit
 {
-	@ViewChild('clock', { static: true }) clockEl!: ElementRef<HTMLDivElement>;
-
-	public 	entries = signal<Entries[]>([]);
-	public 	entryValues = computed(() => this.entries().map(entry => (
-	{
-		inPosition: Graphics.getInPosition(entry),
-		outPosition: Graphics.getOutPosition(entry),
-		lineHeight: Graphics.getEntryLineHeight(entry),
-		hasOut: this.getOuts(entry),
-		image: 'url(https://randomuser.me/api/portraits/men/1.jpg)',
-	})));
+	public	emps = signal<Employee[]>([]);
+	public	empCount: number = 0;
+	public	activeEmps = computed(() => 
+		this.emps()
+			.filter(emp => emp.activeEntryId != null)
+			.map((emp, index) => (
+			{
+				...emp,
+				position: this.setPosition(index),
+				trailPos: this.setTrailPosition(index),
+				elapsedTxt: emp.elapsedTxt
+			}
+			)));
 	
+	public 	activeEmpCount: number = 0;
 	public	empCodeInput: string = '';
 	public	selectedEmp: Employee | null = null;
+	public	fallbackImage = 'avatar.svg';
 	
-	constructor(private router: Router, private entriesService: EntriesService, private employeeService: EmployeeService, private ngZone: NgZone, private cdr: ChangeDetectorRef) {}
+	constructor(private router: Router, private entriesService: EntriesService, public employeeService: EmployeeService, private ngZone: NgZone, private cdr: ChangeDetectorRef) {}
 
 	ngOnInit() 
 	{
 		this.ngZone.runOutsideAngular(() => 
 		{
+			// Update elapsedTxt for all active employees every minute
 			setInterval(() => 
 			{
-				this.clockEl.nativeElement.textContent = new Date().toLocaleTimeString();
-			}, 
-			1000);
+				this.ngZone.run(() =>
+				{
+					this.emps().forEach(emp => 
+					{
+						if (emp.activeEntryId) 
+						{
+							this.setTrailSize(emp);
+						}
+					});
+				});
+			}, 60000);
 		});
-		
-		this.getTodaysEntries();
+
+		this.getActiveEmps();
 	}
 
-	// Loads today's clock-ins and clock-outs
-	getTodaysEntries()
+	// Loads active emps
+	getActiveEmps()
 	{
-		let startDate = new Date();
-		let endDate = new Date();
-
-		let entriesRequest: GetAllEntriesInRangeRequest = { startDate, endDate };
-		
-		this.entriesService.getAllEntriesInRange(entriesRequest).subscribe(
+		this.employeeService.getEmployees().subscribe(
 		{
-			next: (response: Entries[]) => { this.entries.set(response), console.log("Today's entries: "), console.log(response); },
+			next: (emps) => 
+			{ 
+				this.emps.set(emps);
+				this.emps().forEach(emp => 
+				{
+					if (emp.activeEntryId)
+						this.setTrailSize(emp);
+				}),
+				this.empCount = this.emps().length;
+				this.activeEmpCount = this.activeEmps().length;
+				console.log("Employees loaded");
+			},
 			error: (err) => { console.error(err) }
 		})
+	}
+
+	setPosition(index: number)
+	{
+		const	startColumm = 10;
+		const	step = 100;
+		const	position: String = (startColumm + step * index) + 'px';
+
+		console.log("position of " + index + " is " + position);
+		return (position);
+	}
+
+	setTrailPosition(index: number)
+	{
+		const	leftPos = 300;
+		const	step = 100;
+		const	offset = 0;
+
+		if (index == 0)
+			return (leftPos + offset + 'px');
+
+		return ((leftPos + step * index) + offset + 'px');
+	}
+
+	setTrailSize(emp: Employee)
+	{
+		const minWidth = 10;
+		const maxWidth = 500;
+		const step = maxWidth / 43200;
+	  
+		this.employeeService.getElapsedTime(emp.id).subscribe(res => 
+		{
+			const 	elapsed = this.parseDuration(res);
+			let 	Width = minWidth + elapsed * step;
+
+			if (Width > maxWidth)
+				Width = maxWidth;
+	  
+			this.emps.update(list =>
+				list.map(e =>
+				e.id === emp.id
+				? {
+					...e,
+					trailWidth: Width + 'px',
+					elapsedTxt: this.formatSecondsToHM(elapsed)
+				  }
+					: e
+				)
+			);
+		});
+	}
+
+	parseDuration(duration: string): number 
+	{
+		const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?/);
+	  
+		const hours = Number(match?.[1] || 0);
+		const minutes = Number(match?.[2] || 0);
+		const seconds = Number(match?.[3] || 0);
+	  
+		return (hours * 3600 + minutes * 60 + seconds);
+	}
+
+	formatSecondsToHM(totalSeconds: number): string 
+	{
+		const hours = Math.floor(totalSeconds / 3600);
+		const minutes = Math.floor((totalSeconds % 3600) / 60);
+	  
+		return (`${hours}:${minutes.toString().padStart(2, '0')}`);
 	}
 
 	saveEmpcode(empCode: string)
@@ -97,7 +184,7 @@ export class Hello implements OnInit
 			{
 				this.entriesService.clockIn(this.selectedEmp.id).subscribe(
 				{
-					next: () => { console.log("Clocked in successful"); this.selectedEmp = null, this.getTodaysEntries() },
+					next: () => { console.log("Clocked in successful"); this.selectedEmp = null, this.getActiveEmps() },
 					error: (err) => { console.log("Clocked in failed"); }
 				})
 			}
@@ -109,7 +196,7 @@ export class Hello implements OnInit
 		{
 			this.entriesService.clockOut(this.selectedEmp.id).subscribe(
 			{
-				next: () => { console.log("Clocked out successful"); this.selectedEmp = null, this.getTodaysEntries() },
+				next: () => { console.log("Clocked out successful"); this.selectedEmp = null, this.getActiveEmps() },
 				error: (err) => { console.log("Clocked out failed"); }
 			})
 		}
@@ -121,7 +208,7 @@ export class Hello implements OnInit
 		{
 			this.entriesService.breakIn(this.selectedEmp.id).subscribe(
 			{
-				next: () => { console.log("Break in successful"); this.selectedEmp = null, this.getTodaysEntries() },
+				next: () => { console.log("Break in successful"); this.selectedEmp!.onBreak = true; this.selectedEmp = null, this.getActiveEmps() },
 				error: (err) => { console.log("Break in failed"); }
 			})
 		}
@@ -133,7 +220,7 @@ export class Hello implements OnInit
 		{
 			this.entriesService.breakOut(this.selectedEmp.id).subscribe(
 			{
-				next: () => { console.log("Break out successful"); this.selectedEmp = null, this.getTodaysEntries() },
+				next: () => { console.log("Break out successful"); this.selectedEmp!.onBreak = false; this.selectedEmp = null, this.getActiveEmps() },
 				error: (err) => { console.log("Break out failed"); }
 			})
 		}
@@ -144,8 +231,9 @@ export class Hello implements OnInit
 		this.selectedEmp = null;
 	}
 
-	login()
+	goToEmployeePage(employee: Employee)
 	{
-		this.router.navigate(['/login']);
+		console.log("Heading to employee page...");
+		this.router.navigate(['/employee/' + employee.id]);
 	}
 }

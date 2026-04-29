@@ -10,7 +10,7 @@
 			<button class="thumb new" title="new" onclick="window.location.href='/add-employee'">+</button>
 			<div *ngFor="let emp of filteredEmps()" class="emp-container" (click)="goToEmployeePage(emp)" >
 				<button class="thumb"
-					[style.background-image]="'url(' + emp.imageUrl + ')'" 
+					[style.background-image]="'url(' + empService.getImageUrl(emp) + ')'" 
 					[style.background-size]="'cover'" 
 					[style.background-position]="'center'" 
 					[style.background-repeat]="'no-repeat'"

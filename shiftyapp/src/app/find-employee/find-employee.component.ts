@@ -23,7 +23,7 @@ export class FindEmployeeComponent
 	protected 	index = signal(0);
 	private		edge: number = 0;
 
-	constructor(private empService: EmployeeService, private router: Router) {}
+	constructor(public empService: EmployeeService, private router: Router) {}
 
 	ngOnInit()
 	{
@@ -36,8 +36,6 @@ export class FindEmployeeComponent
 
 	goToEmployeePage(employee: Employee)
 	{
-		let	selectedEmp: Employee = employee;
-
 		console.log("Heading to employee page...");
 		this.router.navigate(['/employee/' + employee.id]);
 	}
@@ -79,7 +77,7 @@ export class FindEmployeeComponent
 		this.index.set((this.index() - 1));
 	}
 
-	// 160 is the width of the elements + the gap; we substract 1 step so we end up just 1 position right to the "add emp" button
+	// 160 is the width of the element + the gap; we substract 1 step so we end up just 1 position right to the "add emp" button
 	getTransform() 
 	{
 		if (this.filteredEmps().length == 0)

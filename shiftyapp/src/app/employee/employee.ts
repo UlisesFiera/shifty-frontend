@@ -13,4 +13,7 @@ export interface Employee
 	lastBreakIn: string;
 	lastBreakOut: string;
 	onBreak: boolean;
+
+	trailWidth?: string;
+	elapsedTxt?: string;
 }

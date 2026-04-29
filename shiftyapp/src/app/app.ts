@@ -14,5 +14,17 @@ import { CommonModule } from '@angular/common';
 
 export class App 
 {
+	showHeader = true;
 
+	constructor(private router: Router) 
+	{
+		this.router.events.subscribe(event => 
+			{
+			if (event instanceof NavigationEnd) 
+			{
+				const hiddenRoutes = ['/login'];
+				this.showHeader = !hiddenRoutes.includes(event.urlAfterRedirects);
+			}
+		});
+	}
 }

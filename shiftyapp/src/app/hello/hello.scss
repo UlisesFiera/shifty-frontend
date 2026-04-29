@@ -15,12 +15,29 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}		
 
-	.empcode-form-container
+
+.empCount
+{
+	transform: translateY(100px);
+	color: #a7a7a7;
+	font-size: 12px;
+}
+
+.clockin-elements
+{
+	padding-top: 100px;
+
+	z-index: 1;
+	font-size: 12px;
+
+	.empcode-input-container
 	{
+
 		z-index: 2000;
 
-		.empcode-form {width: 15vw;}
+		.empcode-input {width: 300px; height: 30px; border-radius: 5px;}
 		.cancel {width: 15vw; box-shadow: 0 0 1px p.$white;}
 	}
 
@@ -46,185 +63,101 @@
 			&.break-out {color: p.$white; &:hover {color: p.$black; background-color: p.$yellow;}}
 		}
 	}
+}
 
-	.timeline
+.background-layer 
+{
+	position: relative;
+
+	top: 40px;
+	width: fit-content;
+	height: fit-content;
+	margin-bottom: 50px;
+
+	display: flex;
+
+	transition: transform 0.3s ease;
+
+	.thumb-wrapper
+	{
+		position: absolute;
+		left: -280px;
+	}
+
+	.thumb
+	{
+		height: 51px;
+		width: 51px;
+
+		border-radius: 50%;
+		border: 0.5px, solid, p.$idle;
+
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+
+		color: transparent;
+
+		z-index: 2;
+		position: relative;
+	}
+	.thumb:hover 
+	{
+		color: p.$white;
+	}
+	.thumb::after 
+	{
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-color: p.$black;
+		opacity: 0;
+		transition: opacity 0.5s ease;
+		color: p.$white;
+		border-radius: 50%;
+	}
+	.thumb:hover::after 
+	{
+		opacity: 1;
+	}
+	.thumb .text 
 	{
 		position: relative;
-
-		width: 1200px;
-		height: 1px;
-
-		background-color: p.$yellow;
-		box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.342);
-
-		z-index: 1000;
-
-		.time
-		{
-			position: absolute;
-			top: 50%;
-			left: 50%;
-
-			transform: translate(-50%, -50%);
-			height: 10px;
-			width: 1223px;
-
-			background-color: transparent;
-			color: p.$white;
-
-			font-family: 'Inter', sans-serif;
-			font-size: 8px;
-			text-align: center;
-
-			z-index: 1001;
-
-			.start
-			{
-				position: absolute;
-				left: 0;
-			}
-			.afternoon
-			{
-				position: absolute;
-				left: 50%;
-				transform: translateX(-50%);
-			}
-			.end
-			{
-				position: absolute;
-				right: 0;
-			}
-		}
-
-		// 12-hours circles
-		.marks
-		{
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			width: 1200px;
-			transform: translateX(-50%);
-			z-index: 1000;
-		}
-		.mark
-		{
-			position: absolute;
-			width: 32px;
-			height: 32px;
-			background-color: p.$black;
-			border-radius: 50%;
-			border: 1px solid p.$yellow;
-		}
-		.start-dot
-		{
-			left: 0;
-			transform: translateX(-50%) translateY(-50%);
-		}
-		.afternoon-dot
-		{
-			left: 50%;
-			transform: translateX(-50%) translateY(-50%);
-		}
-		.end-dot
-		{
-			right: 0;
-			transform: translateX(50%) translateY(-50%);
-		}
-
-		// timeline-hour marks
-
-		.ticks
-		{
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			width: 1200px;
-			transform: translate(-50%, -50%);
-			z-index: 999;
-
-			.tick
-			{
-				position: absolute;
-				width: 1px;
-				height: 8px;
-				background-color: p.$yellow;
-				transform: translateY(-50%);
-			}
-			@for $i from 0 through 24
-			{
-				.tick:nth-child(#{$i + 1})
-				{
-					left: math.div($i, 24) * 100%;
-				}
-			}
-		}
-
-		// clock-in and out elements
-
-		.dot
-		{
-			position: absolute;
-			width: 5px;
-			height: 5px;
-			border-radius: 50%;
-			top: 50%;
-			transform: translateX(-50%) translateY(-50%);
-			z-index: 1100;
-			&.dot-in
-			{
-				background-color: p.$green;
-				box-shadow: 0 0 10px p.$green;
-			}
-			&.dot-out
-			{
-				background-color: p.$red;
-				box-shadow: 0 0 10px p.$red;
-			}
-		}
-
-		.line
-		{
-			position: absolute;
-			width: 1px;
-			transform: translateX(-50%) translateY(0); 
-			z-index: 1100;
-			&.line-in
-				{background-color: p.$green;}
-			&.line-out
-				{background-color: p.$red;}
-		}
-
-		.thumb
-		{
-			position: absolute;
-			width: 20px;
-			height: 20px;
-			border-radius: 100%;
-			z-index: 1100;
-			transform: translateX(-50%);
-			&.thumb-in
-			{
-				border: 1px solid;
-				border-color: p.$green;
-	
-			}
-			&.thumb-out
-			{
-				border: 1px solid;
-				border-color: p.$red;
-	
-			}
-		}	
-	}
-
-	.clock
-	{
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-
-	.clock-elements
-	{
+		z-index: 2;
 		
+		color: transparent;
+		transition: color 0.5s ease;
 	}
-}		
+	.thumb:hover .text 
+	{
+		color: white;
+	}
+
+	.trail
+	{	
+		min-width: 25px;
+		height: 5px;
+
+		background-color: rgb(185, 211, 147);
+		border-radius: 50px;
+
+		z-index: -1;
+	}
+
+	.head
+	{
+		display: flex;
+		align-items: center;
+		justify-content: center; 
+		
+		height: 51px;
+		width: 51px;
+
+		border-radius: 50%;
+
+		background-color: rgb(185, 211, 147);
+		color: p.$black;
+		z-index: -2;
+	}
+	
+}

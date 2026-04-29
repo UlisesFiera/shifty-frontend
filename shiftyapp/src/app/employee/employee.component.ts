@@ -20,6 +20,8 @@ export class EmployeeComponent
 	private		employeeId!: string;
 	protected	lastShift!: string;
 	protected	isEditing = signal(false);
+	protected	uploadedImage = '';
+	protected	uploadedFile!: FormData;
 
 	// Employee editing fields
 	protected	editName: string = '';
@@ -57,7 +59,21 @@ export class EmployeeComponent
 		employeeUpdate.email = this.editEmail;
 		employeeUpdate.jobTitle = this.editJobTitle;
 
-		this.empService.updateEmployee(employee.id, employeeUpdate).subscribe( data => { console.log("Update successful"); window.location.reload();});
+		this.empService.uploadFile(this.uploadedFile).subscribe( 
+		{
+			next: (img) => 
+			{ 
+				employeeUpdate.imageUrl = img; 
+				console.log("Img uploaded, route " + img); 
+
+				this.empService.updateEmployee(employee.id, employeeUpdate).subscribe( data => 
+				{ 
+					console.log("Update successful"); 
+					window.location.reload();
+				});
+			},
+			error: (err) => { console.log("Error: " + err.message);}
+		});
 	}
 
 	deleteEmp(employee: Employee)
@@ -84,4 +100,18 @@ export class EmployeeComponent
 		this.lastShift = `${year}-${month}-${day} ${hours}:${minutes}`;
 	}
 
-  }
+	onFileSelected(event: Event) 
+	{
+		const input = event.target as HTMLInputElement;
+	  
+		if (!input.files || input.files.length === 0) 
+			return ;
+	  
+		const file = input.files[0];
+
+		this.uploadedImage = URL.createObjectURL(file);
+
+		this.uploadedFile = new FormData();
+		this.uploadedFile.append('file', file);
+	}
+}

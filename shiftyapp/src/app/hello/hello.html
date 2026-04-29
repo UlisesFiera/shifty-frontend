@@ -1,101 +1,12 @@
 <div class="hello-page">
 
-	<div class="divider" style="height: 50%;"></div>
+	<div class="clockin-elements">
+		<span class="empCount">
+			{{ activeEmpCount }} / {{empCount}}
+		</span>
 
-	<div class="timeline">
-		
-		<div class="time">
-			<div class="start">00:00</div>
-			<div class="afternoon">12:00</div>
-			<div class="end">24:00</div>
-		</div>
-
-		<div class="marks">
-			<div class="mark start-dot"></div>
-			<div class="mark afternoon-dot"></div>
-			<div class="mark end-dot"></div>
-		</div>
-
-		<div class="ticks">
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-			<div class="tick"></div>
-		</div>
-
-		<div *ngFor="let e of entryValues()">
-			<span class="dot dot-in" [style.left]="e.inPosition">
-			</span>
-
-			<span 
-				class="line line-in" 
-				[style.left]="e.inPosition" 
-				[style.height]="e.lineHeight" 
-				[style.bottom.%]="50">
-			</span>
-
-			<span
-				class="thumb thumb-in"
-				[style.left]="e.inPosition" 
-				[style.bottom]="e.lineHeight"
-				[style.background-image]="e.image"
-				[style.background-size]="'cover'"
-				[style.background-position]="'center'"
-				[style.background-repeat]="'no-repeat'">
-			</span>
-
-			<span *ngIf="e.hasOut" class="dot dot-out" [style.left]="e.outPosition">
-			</span>
-
-			<span 
-				*ngIf="e.hasOut" 
-				class="line line-out" 
-				[style.left]="e.outPosition" 
-				[style.height]="e.lineHeight" 
-				[style.top.%]="0">
-			</span>
-
-			<span
-				*ngIf="e.hasOut"
-				class="thumb thumb-out"
-				[style.left]="e.outPosition" 
-				[style.top]="e.lineHeight"
-				[style.background-image]="e.image"
-				[style.background-size]="'cover'"
-				[style.background-position]="'center'"
-				[style.background-repeat]="'no-repeat'">
-			</span>
-		</div>
-	</div>
-
-	<div class="divider" style="height: 30%;"></div>
-
-	<div class="clock-elements">
-		<div class="clock" #clock></div>
-		
-		<div class="empcode-form-container">
-			<input *ngIf="selectedEmp === null" type="text" class="form empcode-form" placeholder="login" #empCodeInput (keyup.enter)="saveEmpcode(empCodeInput.value); empCodeInput.value=''; empCodeInput.blur()">
+		<div class="empcode-input-container">
+			<input *ngIf="selectedEmp === null" type="text" class="form empcode-input" placeholder="enter alias..." #empCodeInput (keyup.enter)="saveEmpcode(empCodeInput.value); empCodeInput.value=''; empCodeInput.blur()">
 			<button *ngIf="selectedEmp !== null " class="button clocker-button cancel" (click)="cancelClick()">cancel</button>
 		</div>
 		
@@ -106,4 +17,37 @@
 			<button *ngIf="selectedEmp !== null && selectedEmp.activeEntryId !== null && selectedEmp.onBreak === true" class="button clocker-button break-out" (click)="breakOutClick()">break out</button>
 		</div>
 	</div>
+
+	<div class="background-layer">
+		<ng-container *ngFor="let e of activeEmps()">
+			<div class="thumb-wrapper"  [style.top]= e.position>
+				<button  class="button thumb" (click)="goToEmployeePage(e)"
+					[ngStyle]=
+					"{
+						'background-image': `url(${employeeService.getImageUrl(e) || fallbackImage})`,
+					}"
+				>
+					<span class="text">{{e.employeeCode}}</span>
+				</button>
+				<div class="trail"
+					[ngStyle]=
+					"{
+						'width': e.trailWidth,
+						'background-color': e.onBreak ? '#fff38b' : '#C1E1C1',
+						transform: 'translateY(-25px)translateX(50px)',
+					}"
+				></div>
+				<button class="button head"
+					[ngStyle]=
+					"{
+						'background-color': e.onBreak ? '#fff38b' : '#D1E1C1',
+						transform: `translateY(-56px) translateX(calc(${e.trailWidth} + 50px))`
+					}"
+				>{{e.elapsedTxt}}
+				</button>
+			</div>
+		</ng-container>
+	</div>
+
+	<div class="page-padding" style="height: 100vh; margin-bottom: 50px;"></div>
 </div>

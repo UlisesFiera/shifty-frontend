@@ -12,4 +12,5 @@
 		<button class="button" *ngIf="!authService.isLoggedIn()" onclick="window.location.href='/login'">Login</button>
 		<button class="button" *ngIf="authService.isLoggedIn()" (click)="logService.logout()">Logout</button>
 	</div>
+	
 </div>
