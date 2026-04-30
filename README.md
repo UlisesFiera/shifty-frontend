@@ -18,24 +18,24 @@ In the backend part, many functionalities are already given as end-points for fu
 
 I refused to use pre-built tools in order to create graphics or carrousels. Everything you see is made from scratch by using (human) logic.
 
-![login](readme-pics/image.png)
+![login](readme_pics/image.png)
 Only the super-admin or managers can log in the app.
 
-![dashboard](readme-pics/image-2.png)
+![dashboard](readme_pics/image-2.png)
 The time shift utility. Tracks time on shift. Each employee checks in with their personalised name. One of these has had a long shift! The lines turn yellow when the emp is on break.
 
-![clocker](readme-pics/image-3.png)
+![clocker](readme_pics/image-3.png)
 
-![block](readme-pics/image-4.png)
+![block](readme_pics/image-4.png)
 The 'prototype logic' of the product is: the manager logs in and blocks the page to hide admin tools. In the future, a way to log in this page for employees will be available requesting a company code.
 
-![alt text](readme-pics/find)
+![alt text](readme_pics/find)
 A smooth carrousel to find them minions easy. You can move around it or just type the name.
 
-![emp](readme-pics/image-6.png)
+![emp](readme_pics/image-6.png)
 The employee data.
 
-![edit](readme-pics/image-7.png)
+![edit](readme_pics/image-7.png)
 You can modify each field and add photo files.
 
 Technical specifications:
