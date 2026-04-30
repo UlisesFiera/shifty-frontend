@@ -1,8 +1,44 @@
-# Shifty Frontend
+# Shifty
 
 This is the frontend for the Shifty employee management system, built with Angular and integrated with a Spring Boot backend.
+You can check out the backend part here: https://github.com/UlisesFiera/shifty-backend
+
+This is just a bare bones prototype for a much bigger incoming app, just to let you see the core functionalities.
 
 ## Key Features & Techniques
+
+The goal was to create a simple clock-in and out app that serves as a starting point for a more complex company resource-management tool.
+
+Inspired by a horrible app at my former weekend job, I tried to make an intuitive and visual way for checking in and out just by typing your personalized login name, and provide a visual
+dashboard alongside super-admin management tools, which right now are pretty basic.
+
+Right now, you can only check-in and out, set your break, perform CRUD operations with the employee component and search them. Future components will be added via microservices.
+
+In the backend part, many functionalities are already given as end-points for future development. For example: employee statistics across time.
+
+I refused to use pre-built tools in order to create graphics or carrousels. Everything you see is made from scratch by using (human) logic.
+
+![login](readme-pics/image.png)
+Only the super-admin or managers can log in the app.
+
+![dashboard](readme-pics/image-2.png)
+The time shift utility. Tracks time on shift. Each employee checks in with their personalised name. One of these has had a long shift! The lines turn yellow when the emp is on break.
+
+![clocker](readme-pics/image-3.png)
+
+![block](readme-pics/image-4.png)
+The 'prototype logic' of the product is: the manager logs in and blocks the page to hide admin tools. In the future, a way to log in this page for employees will be available requesting a company code.
+
+![alt text](readme-pics/find)
+A smooth carrousel to find them minions easy. You can move around it or just type the name.
+
+![emp](readme-pics/image-6.png)
+The employee data.
+
+![edit](readme-pics/image-7.png)
+You can modify each field and add photo files.
+
+Technical specifications:
 
 - **Angular Standalone Components**: Uses Angular's standalone component architecture for modularity and simplicity.
 - **Reactive State with Signals**: Employs Angular's `signal` and `computed` for reactive state management, making UI updates efficient and predictable.
@@ -13,23 +49,3 @@ This is the frontend for the Shifty employee management system, built with Angul
 - **Material Design**: Utilizes Angular Material for icons and UI consistency.
 - **CORS & Security**: Backend and frontend are configured to communicate securely across different ports and origins, with CORS enabled and static resource mapping for uploaded files.
 
-## Project Structure
-
-- `shiftyapp/src/app/` — Main Angular app code (components, services, routes)
-- `shiftyapp/src/environments/` — Environment-specific settings
-- `shiftyapp/public/` — Public assets
-
-## Running the Project
-
-- Frontend: https://your-frontend.vercel.app  
-- Backend: https://your-backend.onrender.com
-
-## Notable Files
-
-- `employee.service.ts`: Handles all employee-related API calls and image URL normalization.
-- `employee.component.ts` & `employee.html`: Main UI for employee data, editing, and image display.
-- `WebConfig.java` (backend): Maps `/files/**` URLs to the uploads directory for image serving.
-
----
-
-For more details, see the code and comments in each file. Contributions and suggestions are welcome!
