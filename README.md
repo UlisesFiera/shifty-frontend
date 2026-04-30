@@ -29,7 +29,7 @@ The time shift utility. Tracks time on shift. Each employee checks in with their
 ![block](readme_pics/image-4.png)
 The 'prototype logic' of the product is: the manager logs in and blocks the page to hide admin tools. In the future, a way to log in this page for employees will be available requesting a company code.
 
-![alt text](readme_pics/find)
+![list](readme_pics/find)
 A smooth carrousel to find them minions easy. You can move around it or just type the name.
 
 ![emp](readme_pics/image-6.png)
